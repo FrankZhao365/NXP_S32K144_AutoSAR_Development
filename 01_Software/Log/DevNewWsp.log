@@ -1,0 +1,15 @@
+﻿25 Jun 2026 19:36:41 - Saving file AdminDataTemplates.xml (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\AdminDataTemplates.xml)
+25 Jun 2026 19:36:41 - Saving file S32K144_Development_Start.dcf (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\S32K144_Development_Start.dcf)
+25 Jun 2026 19:36:41 - Start import
+25 Jun 2026 19:36:42 - Importing file (C:\Program Files (x86)\Vector DaVinci Developer 4.6\Bin\Predefines\StandardPackages_AR4.arxml).
+25 Jun 2026 19:36:47 - Importing file (C:\Program Files (x86)\Vector DaVinci Developer 4.6\Bin\Predefines\ServicePortInterfaces_4.3.1.arxml).
+25 Jun 2026 19:36:47 - Importing file (C:\Program Files (x86)\Vector DaVinci Developer 4.6\Bin\Predefines\ApplicationPortInterfaces_4.3.1.arxml).
+25 Jun 2026 19:36:47 - Importing file (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\AUTOSAR\PlatformTypes_AR4.arxml).
+25 Jun 2026 19:36:47 - Merging imported data
+25 Jun 2026 19:36:52 - Finished import
+25 Jun 2026 19:36:52 - Saving file ProfileSettings.xml (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\ProfileSettings.xml)
+25 Jun 2026 19:36:53 - Saving file Packages.arxml (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\Packages.arxml)
+25 Jun 2026 19:37:05 - Saving file DataTypes.arxml (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\DataTypes.arxml)
+25 Jun 2026 19:37:07 - Saving file PortInterfaces.arxml (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\PortInterfaces.arxml)
+25 Jun 2026 19:37:07 - Saving file S32K144_Development_Start.arxml (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\ECUProjects\S32K144_Development_Start.arxml)
+25 Jun 2026 19:37:07 - Saving file S32K144_Development_Start.dcf (D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Config\Developer\S32K144_Development_Start.dcf)
