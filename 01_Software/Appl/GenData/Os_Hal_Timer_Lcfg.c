@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Os_Hal_Timer_Lcfg.c
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-06-26 03:00:41
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -81,7 +81,7 @@
 /*! HAL timer configuration data: SystemTimer */
 CONST(Os_Hal_TimerPitConfigType, OS_CONST) OsCfg_Hal_TimerPit_SystemTimer =
 {
-  /* .ReloadValue = */ 1uL
+  /* .ReloadValue = */ 80000uL
 };
 
 #define OS_STOP_SEC_CORE0_CONST_UNSPECIFIED

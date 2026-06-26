@@ -20,6 +20,9 @@
  *********************************************************************************************************************/
 
 
+/** Sender receiver - explicit write services */
+Std_ReturnType TSC_Ct_LEDCtrl_Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(BswM_ESH_RunRequest data);
+
 
 
 

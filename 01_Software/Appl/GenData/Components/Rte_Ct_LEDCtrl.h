@@ -43,6 +43,33 @@ extern "C"
 # include "Rte_Ct_LEDCtrl_Type.h"
 # include "Rte_DataHandleType.h"
 
+# ifndef RTE_CORE
+
+/**********************************************************************************************************************
+ * extern declaration of RTE buffers for optimized macro implementation
+ *********************************************************************************************************************/
+#  define RTE_START_SEC_VAR_NOINIT_UNSPECIFIED
+#  include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+extern VAR(BswM_ESH_RunRequest, RTE_VAR_NOINIT) Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode; /* PRQA S 0850 */ /* MD_MSR_19.8 */
+
+#  define RTE_STOP_SEC_VAR_NOINIT_UNSPECIFIED
+#  include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+# endif /* !defined(RTE_CORE) */
+
+
+# ifndef RTE_CORE
+
+/**********************************************************************************************************************
+ * Rte_Write_<p>_<d> (explicit S/R communication with isQueued = false)
+ *********************************************************************************************************************/
+#  define Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode Rte_Write_Ct_LEDCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode
+#  define Rte_Write_Ct_LEDCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode(data) (Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode = (data), ((Std_ReturnType)RTE_E_OK)) /* PRQA S 3453 */ /* MD_MSR_19.7 */
+
+
+# endif /* !defined(RTE_CORE) */
+
 
 # define Ct_LEDCtrl_START_SEC_CODE
 # include "Ct_LEDCtrl_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */

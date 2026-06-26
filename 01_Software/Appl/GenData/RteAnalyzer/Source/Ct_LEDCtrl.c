@@ -42,6 +42,19 @@
  * DO NOT CHANGE THIS COMMENT!           << End of version logging area >>                  DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 
+/**********************************************************************************************************************
+ *
+ * AUTOSAR Modelling Object Descriptions
+ *
+ **********************************************************************************************************************
+ *
+ * Data Types:
+ * ===========
+ * BswM_ESH_RunRequest
+ *   
+ *
+ *********************************************************************************************************************/
+
 #include "Rte_Ct_LEDCtrl.h" /* PRQA S 0857 */ /* MD_MSR_1.1_857 */
 #include "TSC_Ct_LEDCtrl.h"
 
@@ -52,9 +65,30 @@
 
 #include "string.h"
 
+static void Ct_LEDCtrl_TestDefines(void);
+
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of include and declaration area >>          DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+
+
+/**********************************************************************************************************************
+ *
+ * Used AUTOSAR Data Types
+ *
+ **********************************************************************************************************************
+ *
+ * Primitive Types:
+ * ================
+ * uint8: Integer in interval [0...255] (standard type)
+ *
+ * Enumeration Types:
+ * ==================
+ * BswM_ESH_RunRequest: Enumeration of integer in interval [0...255] with enumerators
+ *   RELEASED (0U)
+ *   REQUESTED (1U)
+ *
  *********************************************************************************************************************/
 
 
@@ -87,6 +121,8 @@ FUNC(void, Ct_LEDCtrl_CODE) Ct_LEDCtrl_Init(void) /* PRQA S 0850 */ /* MD_MSR_19
  * Symbol: Ct_LEDCtrl_Init
  *********************************************************************************************************************/
 
+  Ct_LEDCtrl_TestDefines();
+
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
@@ -101,6 +137,14 @@ FUNC(void, Ct_LEDCtrl_CODE) Ct_LEDCtrl_Init(void) /* PRQA S 0850 */ /* MD_MSR_19
  *
  * Executed if at least one of the following trigger conditions occurred:
  *   - triggered on TimingEvent every 500ms
+ *
+ **********************************************************************************************************************
+ *
+ * Output Interfaces:
+ * ==================
+ *   Explicit S/R API:
+ *   -----------------
+ *   Std_ReturnType Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(BswM_ESH_RunRequest data)
  *
  *********************************************************************************************************************/
 /**********************************************************************************************************************
@@ -120,6 +164,24 @@ FUNC(void, Ct_LEDCtrl_CODE) LedCtrl_Runnable(void) /* PRQA S 0850 */ /* MD_MSR_1
  * Symbol: LedCtrl_Runnable
  *********************************************************************************************************************/
 
+  Std_ReturnType fct_status;
+  boolean fct_error = 0;
+
+  BswM_ESH_RunRequest Write_CtLed_Request_ESH_RunRequest_0_requestedMode;
+
+  /*************************************************
+  * Direct Function Accesses
+  *************************************************/
+
+  (void)memset(&Write_CtLed_Request_ESH_RunRequest_0_requestedMode, 0, sizeof(Write_CtLed_Request_ESH_RunRequest_0_requestedMode));
+  fct_status = TSC_Ct_LEDCtrl_Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(Write_CtLed_Request_ESH_RunRequest_0_requestedMode);
+  switch (fct_status)
+  {
+    case RTE_E_OK:
+      fct_error = 0;
+      break;
+  }
+
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
@@ -135,6 +197,13 @@ FUNC(void, Ct_LEDCtrl_CODE) LedCtrl_Runnable(void) /* PRQA S 0850 */ /* MD_MSR_1
  * DO NOT CHANGE THIS COMMENT!           << Start of function definition area >>            DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 
+static void Ct_LEDCtrl_TestDefines(void)
+{
+  /* Enumeration Data Types */
+
+  BswM_ESH_RunRequest Test_BswM_ESH_RunRequest_V_1 = RELEASED;
+  BswM_ESH_RunRequest Test_BswM_ESH_RunRequest_V_2 = REQUESTED;
+}
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of function definition area >>              DO NOT CHANGE THIS COMMENT!

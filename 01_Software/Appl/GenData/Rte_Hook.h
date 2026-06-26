@@ -66,6 +66,8 @@
  *  Rte_Task_Dispatch
  *  Rte_Task_WaitEvent
  *  Rte_Task_WaitEventRet
+ *  Rte_WriteHook_Ct_LEDCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode_Return
+ *  Rte_WriteHook_Ct_LEDCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode_Start
  *  SchM_EnterHook_BswM_BSWM_EXCLUSIVE_AREA_0_Return
  *  SchM_EnterHook_BswM_BSWM_EXCLUSIVE_AREA_0_Start
  *  SchM_EnterHook_Det_DET_EXCLUSIVE_AREA_0_Return

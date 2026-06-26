@@ -1,0 +1,13 @@
+vstdlib.pbi: \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\VStdLib\vstdlib.c \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\VStdLib/vstdlib.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common\Std_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common/Platform_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common/Compiler.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include\Compiler_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Rte_Compiler_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include/Cdd_Tp_Compiler_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include/Cdd_Com_Compiler_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Os_Compiler_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include\VStdLib_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include\MemMap.h

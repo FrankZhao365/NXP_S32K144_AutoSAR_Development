@@ -32,6 +32,9 @@
  *********************************************************************************************************************/
 #include "Dio.h"
 #include "Dio_Cfg.h"
+#define RELEASED  (0U)
+#define REQUESTED (1U)
+
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of include and declaration area >>          DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
@@ -65,8 +68,7 @@ FUNC(void, Ct_LEDCtrl_CODE) Ct_LEDCtrl_Init(void) /* PRQA S 0850 */ /* MD_MSR_19
  * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
  * Symbol: Ct_LEDCtrl_Init
  *********************************************************************************************************************/
-
-
+    (void)Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(REQUESTED);  
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of runnable implementation >>               DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/

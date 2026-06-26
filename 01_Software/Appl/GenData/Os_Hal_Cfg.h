@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Os_Hal_Cfg.h
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-06-26 03:00:41
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -55,7 +55,7 @@
 /* Counter timing macros and constants: SystemTimer */
 # define OSMAXALLOWEDVALUE_SystemTimer     (2147483647uL) /* 0x7FFFFFFFuL */
 # define OSMINCYCLE_SystemTimer            (1uL)
-# define OSTICKSPERBASE_SystemTimer        (1uL)
+# define OSTICKSPERBASE_SystemTimer        (80000uL)
 # define OSTICKDURATION_SystemTimer        (1000000uL)
 
 /* OSEK compatibility for the system timer. */

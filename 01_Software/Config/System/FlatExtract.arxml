@@ -94,6 +94,17 @@
                                     <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/MICROSAR/BswM_swc/ComponentTypes/BswM/Notification_ESH_ModeNotification</TARGET-R-PORT-REF>
                                   </REQUESTER-IREF>
                                 </ASSEMBLY-SW-CONNECTOR>
+                                <ASSEMBLY-SW-CONNECTOR UUID="d6872c56-8c2e-4e74-b891-7631ba71c6d0">
+                                  <SHORT-NAME>Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_BswM_Request_ESH_RunRequest_0</SHORT-NAME>
+                                  <PROVIDER-IREF>
+                                    <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/Ct_LedCtrl</CONTEXT-COMPONENT-REF>
+                                    <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/ComponentTypes/Ct_LEDCtrl/CtLed_Request_ESH_RunRequest_0</TARGET-P-PORT-REF>
+                                  </PROVIDER-IREF>
+                                  <REQUESTER-IREF>
+                                    <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/BswM</CONTEXT-COMPONENT-REF>
+                                    <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/MICROSAR/BswM_swc/ComponentTypes/BswM/Request_ESH_RunRequest_0</TARGET-R-PORT-REF>
+                                  </REQUESTER-IREF>
+                                </ASSEMBLY-SW-CONNECTOR>
                               </CONNECTORS>
                             </COMPOSITION-SW-COMPONENT-TYPE>
                             <END-TO-END-PROTECTION-SET UUID="69f2e5ca-85fc-48b9-9b10-77d0f1377869">
@@ -123,6 +134,7 @@
                                     <SD GID="c9e85f2e-4dfe-48b7-9f01-09c77ebd87f3">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/BswM</SD>
                                     <SD GID="e4e397f5-d1af-4387-9833-0a94e70ffab9">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/BswM_Switch_ESH_ModeSwitch_BswM_Notification_ESH_ModeNotification</SD>
                                     <SD GID="20a0d68c-0407-4d07-bb0e-f6ae6699bba8">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/Ct_LedCtrl</SD>
+                                    <SD GID="d6872c56-8c2e-4e74-b891-7631ba71c6d0">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_BswM_Request_ESH_RunRequest_0</SD>
                                     <SD GID="c0cd31f1-0e74-41ab-89b1-df7e978e433d">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/Det</SD>
                                     <SD GID="0b1170c5-736e-4c8d-b50a-5b6bb3117556">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/EcuM</SD>
                                     <SD GID="ce713fba-d918-4750-a09e-d03e800c98aa">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/COMPOSITIONTYPE/Os_OsCore0_swc</SD>
@@ -130,6 +142,7 @@
                                     <SD GID="67e3bb06-931a-4d43-906f-5c62c0b66659">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/SYSTEM</SD>
                                     <SD GID="5239109f-b723-4f95-a619-d12ade9dd8d8">/COM/VECTOR/CFG/WORKFLOW/SYSDESC/SYNC/SYSTEM/COMPOSITIONTYPE</SD>
                                     <SD GID="BB21DEB5-C1F4-47E1-A55C-031ECDD8629C">/ComponentTypes/Ct_LEDCtrl</SD>
+                                    <SD GID="795C2343-AC3D-4231-8FC2-462F2AB5498F">/ComponentTypes/Ct_LEDCtrl/CtLed_Request_ESH_RunRequest_0</SD>
                                     <SD GID="BE08F465-2C0C-4774-BC44-31159415A3FF">/ComponentTypes/Ct_LEDCtrl/Ct_LEDCtrl_InternalBehavior/Ct_LEDCtrl_InitEvent</SD>
                                     <SD GID="7553C3E5-9202-465B-A0A2-17622F925DCF">/ComponentTypes/Ct_LEDCtrl/Ct_LEDCtrl_InternalBehavior/TMT_LedCtrl_Runnable</SD>
                                     <SD GID="D464FE2B-71A3-49E2-A00F-970C21EFCA01">/ComponentTypes/Ct_LEDCtrl_Implementation</SD>

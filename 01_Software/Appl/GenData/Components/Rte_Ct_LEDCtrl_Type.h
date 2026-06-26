@@ -32,6 +32,18 @@ extern "C"
 
 # ifndef RTE_CORE
 
+/**********************************************************************************************************************
+ * Range, Invalidation, Enumeration and Bit Field Definitions
+ *********************************************************************************************************************/
+
+#  ifndef RELEASED
+#   define RELEASED (0U)
+#  endif
+
+#  ifndef REQUESTED
+#   define REQUESTED (1U)
+#  endif
+
 # endif /* RTE_CORE */
 
 # ifdef __cplusplus

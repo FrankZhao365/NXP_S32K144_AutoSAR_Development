@@ -219,5 +219,6 @@
     </Miscellaneous>
     <SwctGeneration>
         <Component Name="Ct_LedCtrl" GenerationEnabled="true"/>
+        <Component Name="Ct_LEDCtrl" GenerationEnabled="true"/>
     </SwctGeneration>
 </ProjectAssistant>
