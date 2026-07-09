@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: BswM_Cfg.h
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-08 01:31:47
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -37,6 +37,9 @@
     &&&~ INCLUDE
  ----------------------------------------------------------------------------- */
 #include "Std_Types.h"
+#include "ComStack_Types.h" 
+#include "BswM_ComM.h"
+#include "BswM_CanSM.h"
 #include "BswM_EcuM.h"
 
 
@@ -101,7 +104,7 @@
 #define BSWM_DEV_ERROR_DETECT                STD_ON
 #define BSWM_DEV_ERROR_REPORT                STD_ON
 #define BSWM_MODE_CHECK                      STD_ON
-#define BSWM_ENABLE_CANSM                    STD_OFF
+#define BSWM_ENABLE_CANSM                    STD_ON
 #define BSWM_ENABLE_FRSM                     STD_OFF
 #define BSWM_ENABLE_LINSM                    STD_OFF
 #define BSWM_ENABLE_ETHIF                    STD_OFF
@@ -110,7 +113,7 @@
 #define BSWM_ENABLE_DCM                      STD_OFF
 #define BSWM_ENABLE_NVM                      STD_OFF
 #define BSWM_ENABLE_ECUM                     STD_ON
-#define BSWM_ENABLE_COMM                     STD_OFF
+#define BSWM_ENABLE_COMM                     STD_ON
 #define BSWM_ENABLE_J1939DCM                 STD_OFF
 #define BSWM_ENABLE_J1939NM                  STD_OFF
 #define BSWM_ENABLE_SD                       STD_OFF
@@ -121,10 +124,11 @@
 #define BSWM_VERSION_INFO_API                STD_OFF
 #define BSWM_COMM_PNC_SUPPORT                STD_OFF
 #define BSWM_COMM_INITIATE_RESET             STD_OFF
-#define BSWM_CHANNEL_COUNT                   0u
-#define BSWM_WAKEUP_SOURCE_COUNT             5u
-#define BSWM_IPDU_GROUP_CONTROL              STD_OFF
+#define BSWM_CHANNEL_COUNT                   1u
+#define BSWM_WAKEUP_SOURCE_COUNT             6u
+#define BSWM_IPDU_GROUP_CONTROL              STD_ON
 #define BSWM_ECUM_MODE_HANDLING              STD_OFF
+#define BSWM_IPDUGROUPVECTORSIZE             1u
 #define BSWM_MULTIPARTITION                  STD_OFF
 
 
@@ -136,30 +140,37 @@
 /* -----------------------------------------------------------------------------
     &&&~ RULE DEFINES
  ----------------------------------------------------------------------------- */
-#define BswMConf_BswMRule_ESH_RunToPostRun (5) 
-#define BswMConf_BswMRule_ESH_WaitToShutdown (6) 
-#define BswMConf_BswMRule_ESH_WakeupToPrep (8) 
-#define BswMConf_BswMRule_ESH_WaitToWakeup (7) 
-#define BswMConf_BswMRule_ESH_WakeupToRun (9) 
-#define BswMConf_BswMRule_ESH_InitToWakeup (0) 
-#define BswMConf_BswMRule_ESH_PostRunToPrepNested (3) 
-#define BswMConf_BswMRule_ESH_PostRunNested (2) 
-#define BswMConf_BswMRule_ESH_PostRun (1) 
-#define BswMConf_BswMRule_ESH_PrepToWait (4) 
+#define BswMConf_BswMRule_ESH_RunToPostRun (8) 
+#define BswMConf_BswMRule_ESH_WaitToShutdown (10) 
+#define BswMConf_BswMRule_ESH_WakeupToPrep (12) 
+#define BswMConf_BswMRule_ESH_WaitToWakeup (11) 
+#define BswMConf_BswMRule_ESH_WakeupToRun (13) 
+#define BswMConf_BswMRule_ESH_InitToWakeup (3) 
+#define BswMConf_BswMRule_ESH_PostRunToPrepNested (6) 
+#define BswMConf_BswMRule_ESH_PostRunNested (5) 
+#define BswMConf_BswMRule_ESH_PostRun (4) 
+#define BswMConf_BswMRule_ESH_PrepToWait (7) 
+#define BswMConf_BswMRule_CC_CN_CAN00_5e566ad9_RX (0) 
+#define BswMConf_BswMRule_CC_CN_CAN00_5e566ad9_TX (2) 
+#define BswMConf_BswMRule_CC_CN_CAN00_5e566ad9_RX_DM (1) 
+#define BswMConf_BswMRule_ESH_RunToPostRunNested (9) 
 
 
 /* -----------------------------------------------------------------------------
     &&&~ GENERIC DEFINES
  ----------------------------------------------------------------------------- */
-#define BSWM_GENERIC_ESH_State 230u 
+#define BSWM_GENERIC_ESH_State               230u 
+#define BSWM_GENERIC_ESH_ComMPendingRequests 232u 
 
-#define BSWM_GENERICVALUE_ESH_State_ESH_INIT          0x0000u 
-#define BSWM_GENERICVALUE_ESH_State_ESH_POST_RUN      0x0002u 
-#define BSWM_GENERICVALUE_ESH_State_ESH_PREP_SHUTDOWN 0x0003u 
-#define BSWM_GENERICVALUE_ESH_State_ESH_RUN           0x0001u 
-#define BSWM_GENERICVALUE_ESH_State_ESH_SHUTDOWN      0x0005u 
-#define BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM  0x0004u 
-#define BSWM_GENERICVALUE_ESH_State_ESH_WAKEUP        0x0006u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_INIT                               0x0000u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_POST_RUN                           0x0002u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_PREP_SHUTDOWN                      0x0003u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_RUN                                0x0001u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_SHUTDOWN                           0x0005u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM                       0x0004u 
+#define BSWM_GENERICVALUE_ESH_State_ESH_WAKEUP                             0x0006u 
+#define BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_NO_REQUEST      0x0000u 
+#define BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_PENDING_REQUEST 0x0001u 
 
 
 /* -----------------------------------------------------------------------------
@@ -199,22 +210,22 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 #define BSWM_ACTIONLISTS                                              STD_ON
 #define BSWM_FCTPTROFACTIONLISTS                                      STD_ON
 #define BSWM_PARTITIONOFACTIONLISTS                                   STD_OFF  /**< Deactivateable: 'BswM_ActionLists.Partition' Reason: 'No partitions configured.' */
-#define BSWM_CANSMCHANNELMAPPING                                      STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_EXTERNALIDOFCANSMCHANNELMAPPING                          STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.ExternalId' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_IMMEDIATEUSERENDIDXOFCANSMCHANNELMAPPING                 STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.ImmediateUserEndIdx' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_IMMEDIATEUSERSTARTIDXOFCANSMCHANNELMAPPING               STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.ImmediateUserStartIdx' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_IMMEDIATEUSERUSEDOFCANSMCHANNELMAPPING                   STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.ImmediateUserUsed' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_INITVALUEOFCANSMCHANNELMAPPING                           STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.InitValue' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_PARTITIONIDOFCANSMCHANNELMAPPING                         STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.PartitionId' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_CANSMCHANNELSTATE                                        STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelState' Reason: 'No Mode Request for BswMCanSMIndication configured.' */
-#define BSWM_COMMCHANNELMAPPING                                       STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_EXTERNALIDOFCOMMCHANNELMAPPING                           STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ExternalId' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_IMMEDIATEUSERENDIDXOFCOMMCHANNELMAPPING                  STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ImmediateUserEndIdx' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_IMMEDIATEUSERSTARTIDXOFCOMMCHANNELMAPPING                STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ImmediateUserStartIdx' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_IMMEDIATEUSERUSEDOFCOMMCHANNELMAPPING                    STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ImmediateUserUsed' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_INITVALUEOFCOMMCHANNELMAPPING                            STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.InitValue' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_PARTITIONIDOFCOMMCHANNELMAPPING                          STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.PartitionId' Reason: 'No Mode Request for BswMComMIndication configured.' */
-#define BSWM_COMMCHANNELSTATE                                         STD_OFF  /**< Deactivateable: 'BswM_ComMChannelState' Reason: 'No Mode Request for BswMComMIndication configured.' */
+#define BSWM_CANSMCHANNELMAPPING                                      STD_ON
+#define BSWM_EXTERNALIDOFCANSMCHANNELMAPPING                          STD_ON
+#define BSWM_IMMEDIATEUSERENDIDXOFCANSMCHANNELMAPPING                 STD_ON
+#define BSWM_IMMEDIATEUSERSTARTIDXOFCANSMCHANNELMAPPING               STD_ON
+#define BSWM_IMMEDIATEUSERUSEDOFCANSMCHANNELMAPPING                   STD_ON
+#define BSWM_INITVALUEOFCANSMCHANNELMAPPING                           STD_ON
+#define BSWM_PARTITIONIDOFCANSMCHANNELMAPPING                         STD_OFF  /**< Deactivateable: 'BswM_CanSMChannelMapping.PartitionId' Reason: 'No partitions configured.' */
+#define BSWM_CANSMCHANNELSTATE                                        STD_ON
+#define BSWM_COMMCHANNELMAPPING                                       STD_ON
+#define BSWM_EXTERNALIDOFCOMMCHANNELMAPPING                           STD_ON
+#define BSWM_IMMEDIATEUSERENDIDXOFCOMMCHANNELMAPPING                  STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ImmediateUserEndIdx' Reason: 'the optional indirection is deactivated because ImmediateUserUsedOfComMChannelMapping is always 'FALSE' and the target of the indirection is of the Configuration Class 'PRE_COMPILE'.' */
+#define BSWM_IMMEDIATEUSERSTARTIDXOFCOMMCHANNELMAPPING                STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ImmediateUserStartIdx' Reason: 'the optional indirection is deactivated because ImmediateUserUsedOfComMChannelMapping is always 'FALSE' and the target of the indirection is of the Configuration Class 'PRE_COMPILE'.' */
+#define BSWM_IMMEDIATEUSERUSEDOFCOMMCHANNELMAPPING                    STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.ImmediateUserUsed' Reason: 'the optional indirection is deactivated because ImmediateUserUsedOfComMChannelMapping is always 'FALSE' and the target of the indirection is of the Configuration Class 'PRE_COMPILE'.' */
+#define BSWM_INITVALUEOFCOMMCHANNELMAPPING                            STD_ON
+#define BSWM_PARTITIONIDOFCOMMCHANNELMAPPING                          STD_OFF  /**< Deactivateable: 'BswM_ComMChannelMapping.PartitionId' Reason: 'No partitions configured.' */
+#define BSWM_COMMCHANNELSTATE                                         STD_ON
 #define BSWM_COMMINITIATERESETMAPPING                                 STD_OFF  /**< Deactivateable: 'BswM_ComMInitiateResetMapping' Reason: 'No Mode Request for BswMComMInitiateReset configured.' */
 #define BSWM_IMMEDIATEUSERENDIDXOFCOMMINITIATERESETMAPPING            STD_OFF  /**< Deactivateable: 'BswM_ComMInitiateResetMapping.ImmediateUserEndIdx' Reason: 'No Mode Request for BswMComMInitiateReset configured.' */
 #define BSWM_IMMEDIATEUSERSTARTIDXOFCOMMINITIATERESETMAPPING          STD_OFF  /**< Deactivateable: 'BswM_ComMInitiateResetMapping.ImmediateUserStartIdx' Reason: 'No Mode Request for BswMComMInitiateReset configured.' */
@@ -494,6 +505,10 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 #define BSWM_SDEVENTHANDLERSTATE                                      STD_OFF  /**< Deactivateable: 'BswM_SdEventHandlerState' Reason: 'No Mode Request for BswMSdEventHandlerCurrentState configured.' */
 #define BSWM_SIZEOFACTIONLISTQUEUE                                    STD_ON
 #define BSWM_SIZEOFACTIONLISTS                                        STD_ON
+#define BSWM_SIZEOFCANSMCHANNELMAPPING                                STD_ON
+#define BSWM_SIZEOFCANSMCHANNELSTATE                                  STD_ON
+#define BSWM_SIZEOFCOMMCHANNELMAPPING                                 STD_ON
+#define BSWM_SIZEOFCOMMCHANNELSTATE                                   STD_ON
 #define BSWM_SIZEOFDEFERREDRULES                                      STD_ON
 #define BSWM_SIZEOFFORCEDACTIONLISTPRIORITY                           STD_ON
 #define BSWM_SIZEOFGENERICMAPPING                                     STD_ON
@@ -522,6 +537,10 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 #define BSWM_PCCONFIG                                                 STD_ON
 #define BSWM_ACTIONLISTQUEUEOFPCCONFIG                                STD_ON
 #define BSWM_ACTIONLISTSOFPCCONFIG                                    STD_ON
+#define BSWM_CANSMCHANNELMAPPINGOFPCCONFIG                            STD_ON
+#define BSWM_CANSMCHANNELSTATEOFPCCONFIG                              STD_ON
+#define BSWM_COMMCHANNELMAPPINGOFPCCONFIG                             STD_ON
+#define BSWM_COMMCHANNELSTATEOFPCCONFIG                               STD_ON
 #define BSWM_DEFERREDRULESOFPCCONFIG                                  STD_ON
 #define BSWM_FINALMAGICNUMBEROFPCCONFIG                               STD_OFF  /**< Deactivateable: 'BswM_PCConfig.FinalMagicNumber' Reason: 'the module configuration does not support flashing of data.' */
 #define BSWM_FORCEDACTIONLISTPRIORITYOFPCCONFIG                       STD_ON
@@ -539,6 +558,10 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 #define BSWM_RULESOFPCCONFIG                                          STD_ON
 #define BSWM_SIZEOFACTIONLISTQUEUEOFPCCONFIG                          STD_ON
 #define BSWM_SIZEOFACTIONLISTSOFPCCONFIG                              STD_ON
+#define BSWM_SIZEOFCANSMCHANNELMAPPINGOFPCCONFIG                      STD_ON
+#define BSWM_SIZEOFCANSMCHANNELSTATEOFPCCONFIG                        STD_ON
+#define BSWM_SIZEOFCOMMCHANNELMAPPINGOFPCCONFIG                       STD_ON
+#define BSWM_SIZEOFCOMMCHANNELSTATEOFPCCONFIG                         STD_ON
 #define BSWM_SIZEOFDEFERREDRULESOFPCCONFIG                            STD_ON
 #define BSWM_SIZEOFFORCEDACTIONLISTPRIORITYOFPCCONFIG                 STD_ON
 #define BSWM_SIZEOFGENERICMAPPINGOFPCCONFIG                           STD_ON
@@ -597,6 +620,8 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
   \brief  These defines are used to indicate unused indexes in data relations.
   \{
 */ 
+#define BSWM_NO_IMMEDIATEUSERENDIDXOFCANSMCHANNELMAPPING              255u
+#define BSWM_NO_IMMEDIATEUSERSTARTIDXOFCANSMCHANNELMAPPING            255u
 #define BSWM_NO_IMMEDIATEUSERENDIDXOFGENERICMAPPING                   255u
 #define BSWM_NO_IMMEDIATEUSERSTARTIDXOFGENERICMAPPING                 255u
 #define BSWM_NO_RULESINDENDIDXOFIMMEDIATEUSER                         255u
@@ -630,16 +655,23 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
   \{
 */ 
 #define BSWM_ISDEF_FCTPTROFACTIONLISTS                                STD_OFF
+#define BSWM_ISDEF_EXTERNALIDOFCANSMCHANNELMAPPING                    STD_ON
+#define BSWM_ISDEF_IMMEDIATEUSERENDIDXOFCANSMCHANNELMAPPING           STD_ON
+#define BSWM_ISDEF_IMMEDIATEUSERSTARTIDXOFCANSMCHANNELMAPPING         STD_ON
+#define BSWM_ISDEF_IMMEDIATEUSERUSEDOFCANSMCHANNELMAPPING             STD_ON
+#define BSWM_ISDEF_INITVALUEOFCANSMCHANNELMAPPING                     STD_ON
+#define BSWM_ISDEF_EXTERNALIDOFCOMMCHANNELMAPPING                     STD_ON
+#define BSWM_ISDEF_INITVALUEOFCOMMCHANNELMAPPING                      STD_ON
 #define BSWM_ISDEF_RULESIDXOFDEFERREDRULES                            STD_OFF
-#define BSWM_ISDEF_EXTERNALIDOFGENERICMAPPING                         STD_ON
-#define BSWM_ISDEF_IMMEDIATEUSERENDIDXOFGENERICMAPPING                STD_ON
-#define BSWM_ISDEF_IMMEDIATEUSERSTARTIDXOFGENERICMAPPING              STD_ON
-#define BSWM_ISDEF_IMMEDIATEUSERUSEDOFGENERICMAPPING                  STD_ON
-#define BSWM_ISDEF_INITVALUEOFGENERICMAPPING                          STD_ON
-#define BSWM_ISDEF_MASKEDBITSOFIMMEDIATEUSER                          STD_ON
-#define BSWM_ISDEF_ONINITOFIMMEDIATEUSER                              STD_ON
-#define BSWM_ISDEF_RULESINDENDIDXOFIMMEDIATEUSER                      STD_ON
-#define BSWM_ISDEF_RULESINDSTARTIDXOFIMMEDIATEUSER                    STD_ON
+#define BSWM_ISDEF_EXTERNALIDOFGENERICMAPPING                         STD_OFF
+#define BSWM_ISDEF_IMMEDIATEUSERENDIDXOFGENERICMAPPING                STD_OFF
+#define BSWM_ISDEF_IMMEDIATEUSERSTARTIDXOFGENERICMAPPING              STD_OFF
+#define BSWM_ISDEF_IMMEDIATEUSERUSEDOFGENERICMAPPING                  STD_OFF
+#define BSWM_ISDEF_INITVALUEOFGENERICMAPPING                          STD_OFF
+#define BSWM_ISDEF_MASKEDBITSOFIMMEDIATEUSER                          STD_OFF
+#define BSWM_ISDEF_ONINITOFIMMEDIATEUSER                              STD_OFF
+#define BSWM_ISDEF_RULESINDENDIDXOFIMMEDIATEUSER                      STD_OFF
+#define BSWM_ISDEF_RULESINDSTARTIDXOFIMMEDIATEUSER                    STD_OFF
 #define BSWM_ISDEF_RULESINDUSEDOFIMMEDIATEUSER                        STD_ON
 #define BSWM_ISDEF_FCTPTROFRULES                                      STD_OFF
 #define BSWM_ISDEF_IDOFRULES                                          STD_OFF
@@ -655,6 +687,10 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 #define BSWM_ISDEF_RULESUSEDOFRULESOFCONFIG                           STD_ON
 #define BSWM_ISDEF_ACTIONLISTQUEUEOFPCCONFIG                          STD_ON
 #define BSWM_ISDEF_ACTIONLISTSOFPCCONFIG                              STD_ON
+#define BSWM_ISDEF_CANSMCHANNELMAPPINGOFPCCONFIG                      STD_ON
+#define BSWM_ISDEF_CANSMCHANNELSTATEOFPCCONFIG                        STD_ON
+#define BSWM_ISDEF_COMMCHANNELMAPPINGOFPCCONFIG                       STD_ON
+#define BSWM_ISDEF_COMMCHANNELSTATEOFPCCONFIG                         STD_ON
 #define BSWM_ISDEF_DEFERREDRULESOFPCCONFIG                            STD_ON
 #define BSWM_ISDEF_FORCEDACTIONLISTPRIORITYOFPCCONFIG                 STD_ON
 #define BSWM_ISDEF_GENERICMAPPINGOFPCCONFIG                           STD_ON
@@ -680,16 +716,23 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
   \{
 */ 
 #define BSWM_EQ2_FCTPTROFACTIONLISTS                                  
+#define BSWM_EQ2_EXTERNALIDOFCANSMCHANNELMAPPING                      ComMConf_ComMChannel_CN_CAN00_5e566ad9
+#define BSWM_EQ2_IMMEDIATEUSERENDIDXOFCANSMCHANNELMAPPING             1u
+#define BSWM_EQ2_IMMEDIATEUSERSTARTIDXOFCANSMCHANNELMAPPING           0u
+#define BSWM_EQ2_IMMEDIATEUSERUSEDOFCANSMCHANNELMAPPING               TRUE
+#define BSWM_EQ2_INITVALUEOFCANSMCHANNELMAPPING                       CANSM_BSWM_NO_COMMUNICATION
+#define BSWM_EQ2_EXTERNALIDOFCOMMCHANNELMAPPING                       ComMConf_ComMChannel_CN_CAN00_5e566ad9
+#define BSWM_EQ2_INITVALUEOFCOMMCHANNELMAPPING                        COMM_NO_COMMUNICATION
 #define BSWM_EQ2_RULESIDXOFDEFERREDRULES                              
-#define BSWM_EQ2_EXTERNALIDOFGENERICMAPPING                           230
-#define BSWM_EQ2_IMMEDIATEUSERENDIDXOFGENERICMAPPING                  1u
-#define BSWM_EQ2_IMMEDIATEUSERSTARTIDXOFGENERICMAPPING                0u
-#define BSWM_EQ2_IMMEDIATEUSERUSEDOFGENERICMAPPING                    TRUE
-#define BSWM_EQ2_INITVALUEOFGENERICMAPPING                            BSWM_GENERICVALUE_ESH_State_ESH_INIT
-#define BSWM_EQ2_MASKEDBITSOFIMMEDIATEUSER                            0x03u
-#define BSWM_EQ2_ONINITOFIMMEDIATEUSER                                TRUE
-#define BSWM_EQ2_RULESINDENDIDXOFIMMEDIATEUSER                        8u
-#define BSWM_EQ2_RULESINDSTARTIDXOFIMMEDIATEUSER                      0u
+#define BSWM_EQ2_EXTERNALIDOFGENERICMAPPING                           
+#define BSWM_EQ2_IMMEDIATEUSERENDIDXOFGENERICMAPPING                  
+#define BSWM_EQ2_IMMEDIATEUSERSTARTIDXOFGENERICMAPPING                
+#define BSWM_EQ2_IMMEDIATEUSERUSEDOFGENERICMAPPING                    
+#define BSWM_EQ2_INITVALUEOFGENERICMAPPING                            
+#define BSWM_EQ2_MASKEDBITSOFIMMEDIATEUSER                            
+#define BSWM_EQ2_ONINITOFIMMEDIATEUSER                                
+#define BSWM_EQ2_RULESINDENDIDXOFIMMEDIATEUSER                        
+#define BSWM_EQ2_RULESINDSTARTIDXOFIMMEDIATEUSER                      
 #define BSWM_EQ2_RULESINDUSEDOFIMMEDIATEUSER                          TRUE
 #define BSWM_EQ2_FCTPTROFRULES                                        
 #define BSWM_EQ2_IDOFRULES                                            
@@ -700,11 +743,15 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 #define BSWM_EQ2_DEFERREDRULESUSEDOFRULESOFCONFIG                     TRUE
 #define BSWM_EQ2_INITACTIONSOFRULESOFCONFIG                           
 #define BSWM_EQ2_MASKEDBITSOFRULESOFCONFIG                            0x03u
-#define BSWM_EQ2_RULESENDIDXOFRULESOFCONFIG                           10u
+#define BSWM_EQ2_RULESENDIDXOFRULESOFCONFIG                           14u
 #define BSWM_EQ2_RULESSTARTIDXOFRULESOFCONFIG                         0u
 #define BSWM_EQ2_RULESUSEDOFRULESOFCONFIG                             TRUE
 #define BSWM_EQ2_ACTIONLISTQUEUEOFPCCONFIG                            BswM_ActionListQueue.raw
 #define BSWM_EQ2_ACTIONLISTSOFPCCONFIG                                BswM_ActionLists
+#define BSWM_EQ2_CANSMCHANNELMAPPINGOFPCCONFIG                        BswM_CanSMChannelMapping
+#define BSWM_EQ2_CANSMCHANNELSTATEOFPCCONFIG                          BswM_CanSMChannelState
+#define BSWM_EQ2_COMMCHANNELMAPPINGOFPCCONFIG                         BswM_ComMChannelMapping
+#define BSWM_EQ2_COMMCHANNELSTATEOFPCCONFIG                           BswM_ComMChannelState
 #define BSWM_EQ2_DEFERREDRULESOFPCCONFIG                              BswM_DeferredRules
 #define BSWM_EQ2_FORCEDACTIONLISTPRIORITYOFPCCONFIG                   BswM_ForcedActionListPriority
 #define BSWM_EQ2_GENERICMAPPINGOFPCCONFIG                             BswM_GenericMapping
@@ -796,6 +843,12 @@ typedef P2FUNC (Std_ReturnType, BSWM_CODE, BswM_ActionListFuncType)(void);
 /**   \brief  type used to iterate BswM_ActionLists */
 typedef uint8_least BswM_ActionListsIterType;
 
+/**   \brief  type used to iterate BswM_CanSMChannelMapping */
+typedef uint8_least BswM_CanSMChannelMappingIterType;
+
+/**   \brief  type used to iterate BswM_ComMChannelMapping */
+typedef uint8_least BswM_ComMChannelMappingIterType;
+
 /**   \brief  type used to iterate BswM_DeferredRules */
 typedef uint8_least BswM_DeferredRulesIterType;
 
@@ -844,6 +897,12 @@ typedef uint8_least BswM_TimerValueIterType;
 /**   \brief  type used to iterate BswM_ActionListQueue */
 typedef BswM_ActionListsIterType BswM_ActionListQueueIterType;
 
+/**   \brief  type used to iterate BswM_CanSMChannelState */
+typedef BswM_CanSMChannelMappingIterType BswM_CanSMChannelStateIterType;
+
+/**   \brief  type used to iterate BswM_ComMChannelState */
+typedef BswM_ComMChannelMappingIterType BswM_ComMChannelStateIterType;
+
 /**   \brief  type used to iterate BswM_GenericState */
 typedef BswM_GenericMappingIterType BswM_GenericStateIterType;
 
@@ -864,6 +923,21 @@ typedef BswM_RulesIterType BswM_RuleStatesIterType;
 */ 
 /**   \brief  value based type definition for BswM_ActionListQueue */
 typedef uint8 BswM_ActionListQueueType;
+
+/**   \brief  value based type definition for BswM_ExternalIdOfCanSMChannelMapping */
+typedef uint32 BswM_ExternalIdOfCanSMChannelMappingType;
+
+/**   \brief  value based type definition for BswM_ImmediateUserEndIdxOfCanSMChannelMapping */
+typedef uint8 BswM_ImmediateUserEndIdxOfCanSMChannelMappingType;
+
+/**   \brief  value based type definition for BswM_ImmediateUserStartIdxOfCanSMChannelMapping */
+typedef uint8 BswM_ImmediateUserStartIdxOfCanSMChannelMappingType;
+
+/**   \brief  value based type definition for BswM_ImmediateUserUsedOfCanSMChannelMapping */
+typedef boolean BswM_ImmediateUserUsedOfCanSMChannelMappingType;
+
+/**   \brief  value based type definition for BswM_ExternalIdOfComMChannelMapping */
+typedef uint32 BswM_ExternalIdOfComMChannelMappingType;
 
 /**   \brief  value based type definition for BswM_RulesIdxOfDeferredRules */
 typedef uint8 BswM_RulesIdxOfDeferredRulesType;
@@ -949,6 +1023,18 @@ typedef uint8 BswM_SizeOfActionListQueueType;
 /**   \brief  value based type definition for BswM_SizeOfActionLists */
 typedef uint8 BswM_SizeOfActionListsType;
 
+/**   \brief  value based type definition for BswM_SizeOfCanSMChannelMapping */
+typedef uint8 BswM_SizeOfCanSMChannelMappingType;
+
+/**   \brief  value based type definition for BswM_SizeOfCanSMChannelState */
+typedef uint8 BswM_SizeOfCanSMChannelStateType;
+
+/**   \brief  value based type definition for BswM_SizeOfComMChannelMapping */
+typedef uint8 BswM_SizeOfComMChannelMappingType;
+
+/**   \brief  value based type definition for BswM_SizeOfComMChannelState */
+typedef uint8 BswM_SizeOfComMChannelStateType;
+
 /**   \brief  value based type definition for BswM_SizeOfDeferredRules */
 typedef uint8 BswM_SizeOfDeferredRulesType;
 
@@ -1015,6 +1101,18 @@ typedef struct sBswM_ActionListsType
   BswM_ActionListFuncType FctPtrOfActionLists;  /**< Pointer to the array list function. */
 } BswM_ActionListsType;
 
+/**   \brief  type used in BswM_CanSMChannelMapping */
+typedef struct sBswM_CanSMChannelMappingType
+{
+  uint8 BswM_CanSMChannelMappingNeverUsed;  /**< dummy entry for the structure in the configuration variant precompile which is not used by the code. */
+} BswM_CanSMChannelMappingType;
+
+/**   \brief  type used in BswM_ComMChannelMapping */
+typedef struct sBswM_ComMChannelMappingType
+{
+  uint8 BswM_ComMChannelMappingNeverUsed;  /**< dummy entry for the structure in the configuration variant precompile which is not used by the code. */
+} BswM_ComMChannelMappingType;
+
 /**   \brief  type used in BswM_DeferredRules */
 typedef struct sBswM_DeferredRulesType
 {
@@ -1024,13 +1122,18 @@ typedef struct sBswM_DeferredRulesType
 /**   \brief  type used in BswM_GenericMapping */
 typedef struct sBswM_GenericMappingType
 {
-  uint8 BswM_GenericMappingNeverUsed;  /**< dummy entry for the structure in the configuration variant precompile which is not used by the code. */
+  BswM_ExternalIdOfGenericMappingType ExternalIdOfGenericMapping;  /**< External id of BswMGenericRequest. */
+  BswM_ImmediateUserEndIdxOfGenericMappingType ImmediateUserEndIdxOfGenericMapping;  /**< the end index of the 0:n relation pointing to BswM_ImmediateUser */
+  BswM_ImmediateUserStartIdxOfGenericMappingType ImmediateUserStartIdxOfGenericMapping;  /**< the start index of the 0:n relation pointing to BswM_ImmediateUser */
+  BswM_ModeType InitValueOfGenericMapping;  /**< Initialization value of port. */
 } BswM_GenericMappingType;
 
 /**   \brief  type used in BswM_ImmediateUser */
 typedef struct sBswM_ImmediateUserType
 {
-  uint8 BswM_ImmediateUserNeverUsed;  /**< dummy entry for the structure in the configuration variant precompile which is not used by the code. */
+  BswM_MaskedBitsOfImmediateUserType MaskedBitsOfImmediateUser;  /**< contains bitcoded the boolean data of BswM_OnInitOfImmediateUser, BswM_RulesIndUsedOfImmediateUser */
+  BswM_RulesIndEndIdxOfImmediateUserType RulesIndEndIdxOfImmediateUser;  /**< the end index of the 0:n relation pointing to BswM_RulesInd */
+  BswM_RulesIndStartIdxOfImmediateUserType RulesIndStartIdxOfImmediateUser;  /**< the start index of the 0:n relation pointing to BswM_RulesInd */
 } BswM_ImmediateUserType;
 
 /**   \brief  type used in BswM_Rules */
@@ -1070,6 +1173,13 @@ typedef struct sBswM_ActionListQueueStructTag
   BswM_ActionListQueueType AL_ESH_AL_ExitPostRun[1];
   BswM_ActionListQueueType AL_ESH_AL_PrepShutdownToWaitForNvM[1];
   BswM_ActionListQueueType AL_INIT_AL_Initialize[1];
+  BswM_ActionListQueueType AL_CC_AL_CN_CAN00_5e566ad9_RX_Disable[1];
+  BswM_ActionListQueueType AL_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit[1];
+  BswM_ActionListQueueType AL_CC_AL_CN_CAN00_5e566ad9_TX_Disable[1];
+  BswM_ActionListQueueType AL_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit[1];
+  BswM_ActionListQueueType AL_CC_AL_CN_CAN00_5e566ad9_Disable_DM[1];
+  BswM_ActionListQueueType AL_CC_AL_CN_CAN00_5e566ad9_Enable_DM[1];
+  BswM_ActionListQueueType AL_ESH_AL_ExitRun[1];
 } sBswM_ActionListQueueStructType;
 
 /**   \brief  type to be used as symbolic data element access to BswM_TimerState */
@@ -1096,7 +1206,7 @@ typedef struct sBswM_TimerValueStructTag
 /**   \brief  type to access BswM_ActionListQueue in an index and symbol based style. */
 typedef union uBswM_ActionListQueueTag
 {  /* PRQA S 0750 */  /* MD_CSL_18.4 */
-  BswM_ActionListQueueType raw[12];
+  BswM_ActionListQueueType raw[19];
   sBswM_ActionListQueueStructType str;
 } uBswM_ActionListQueueType;
 
@@ -1192,6 +1302,7 @@ extern FUNC(void, BSWM_CODE) BswM_ESH_OnEnterPrepShutdown(void);
 extern FUNC(void, BSWM_CODE) BswM_ESH_OnEnterWakeup(void);
 extern FUNC(void, BSWM_CODE) BswM_ESH_OnEnterRun(void);
 extern FUNC(void, BSWM_CODE) BswM_ESH_OnEnterWaitForNvm(void);
+extern FUNC(void, BSWM_CODE) ESH_ComM_CheckPendingRequests(void);
 /* PRQA L:CALLOUTDECLARATIONS */
 
 #define BSWM_STOP_SEC_CODE

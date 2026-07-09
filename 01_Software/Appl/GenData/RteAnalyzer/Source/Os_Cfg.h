@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  Os_Cfg.h
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -31,9 +31,11 @@
 /* Alarms */
 # define Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable (0U)
 # define Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms (1U)
+# define Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms (2U)
 
 /* Events */
 # define Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms (0x01)
+# define Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms (0x02)
 # define Rte_Ev_Run_Ct_LedCtrl_LedCtrl_Runnable (0x01)
 
 /* Spinlocks */

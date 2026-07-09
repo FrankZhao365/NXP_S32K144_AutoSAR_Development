@@ -11,7 +11,7 @@
  *          File:  Rte_Type.h
  *        Config:  D:/NXP_S32K144_AutoSAR_Development/NXP_S32K144_AutoSAR_Development/01_Software/S32K144_Development_Start.dpa
  *     SW-C Type:  Ct_LEDCtrl
- *  Generated at:  Thu Jun 25 23:27:51 2026
+ *  Generated at:  Thu Jul  9 01:21:10 2026
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -25,6 +25,17 @@
 # define _RTE_TYPE_H
 
 # include "Rte.h"
+
+
+/**********************************************************************************************************************
+ * Data type definitions
+ *********************************************************************************************************************/
+
+# define Rte_TypeDef_BswM_ESH_RunRequest
+typedef uint8 BswM_ESH_RunRequest;
+
+# define Rte_TypeDef_ComM_ModeType
+typedef uint8 ComM_ModeType;
 
 
 # ifndef RTE_SUPPRESS_UNUSED_DATATYPES
@@ -41,8 +52,11 @@ typedef const void * dtRef_const_VOID;
 #  define Rte_TypeDef_BswM_ESH_Mode
 typedef uint8 BswM_ESH_Mode;
 
-#  define Rte_TypeDef_BswM_ESH_RunRequest
-typedef uint8 BswM_ESH_RunRequest;
+#  define Rte_TypeDef_ComM_InhibitionStatusType
+typedef uint8 ComM_InhibitionStatusType;
+
+#  define Rte_TypeDef_ComM_UserHandleType
+typedef uint8 ComM_UserHandleType;
 
 #  define Rte_TypeDef_Dem_UdsStatusByteType
 typedef uint8 Dem_UdsStatusByteType;

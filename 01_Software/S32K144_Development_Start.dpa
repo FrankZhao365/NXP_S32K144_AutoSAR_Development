@@ -36,8 +36,11 @@
     </Folders>
     <Tools>
         <DEV>C:\Program Files (x86)\Vector DaVinci Developer 4.6\Bin\DaVinciDEV.exe</DEV>
+        <LegacyConverter Version="1.8.24"/>
+        <DDM Version="5.18.37 SP1"/>
     </Tools>
     <Input>
+        <ECUEX>Config\System\SystemExtract.arxml</ECUEX>
         <Options>
             <IgnoreUuidsSystemDescriptionFiles>false</IgnoreUuidsSystemDescriptionFiles>
             <IgnoreUuidsStandardConfigurationFiles>false</IgnoreUuidsStandardConfigurationFiles>
@@ -47,11 +50,13 @@
     </Input>
     <References>
         <DVWorkspace>.\Config\Developer\S32K144_Development_Start.dcf</DVWorkspace>
-        <FlatMap>.\Config\System\FlatMap.arxml</FlatMap>
-        <FlatECUEX>.\Config\System\FlatExtract.arxml</FlatECUEX>
+        <FlatMap>Config\System\FlatMap.arxml</FlatMap>
+        <FlatECUEX>Config\System\FlatExtract.arxml</FlatECUEX>
+        <OEMCommunicationExtract>Config\System\Communication.arxml</OEMCommunicationExtract>
+        <EcucFileReferences/>
     </References>
     <EcucSplitter>
-        <Configuration>.\Config\ECUC\S32K144_Development_Start.ecuc.arxml</Configuration>
+        <Configuration>Config\ECUC\S32K144_Development_Start.ecuc.arxml</Configuration>
         <Splitter File=".\Config\ECUC\S32K144_Development_Start_Base_ecuc.arxml">
             <Module Name="Base"/>
         </Splitter>
@@ -88,10 +93,35 @@
         <Splitter File=".\Config\ECUC\S32K144_Development_Start_EcuC_ecuc.arxml">
             <Module Name="EcuC"/>
         </Splitter>
+        <Splitter File=".\Config\ECUC\S32K144_Development_Start_Com_ecuc.arxml">
+            <Module Name="Com"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\S32K144_Development_Start_PduR_ecuc.arxml">
+            <Module Name="PduR"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\S32K144_Development_Start_CanSM_ecuc.arxml">
+            <Module Name="CanSM"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\S32K144_Development_Start_Can_ecuc.arxml">
+            <Module Name="Can"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\S32K144_Development_Start_CanIf_ecuc.arxml">
+            <Module Name="CanIf"/>
+        </Splitter>
+        <Splitter File=".\Config\ECUC\S32K144_Development_Start_ComM_ecuc.arxml">
+            <Module Name="ComM"/>
+        </Splitter>
         <OwnFolderForEachSplitter>false</OwnFolderForEachSplitter>
     </EcucSplitter>
+    <Display LastVersion="5.18.37 SP1">
+        <FileSet Id="" CS="de5c71ca">
+            <File Order="0" EcuInstance="MyECU" Hash="4a531cde891d2234c8ce994e25b5150a" FileCategory="legacy_communication_data">D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\03_DBC\CAN.dbc</File>
+        </FileSet>
+        <Merge/>
+    </Display>
     <ECUC>
-        <Active RootPackageName="/ActiveEcuC/ActiveEcuC">.\Config\ECUC\S32K144_Development_Start.ecuc.arxml</Active>
+        <Active RootPackageName="/ActiveEcuC/ActiveEcuC">Config\ECUC\S32K144_Development_Start.ecuc.arxml</Active>
+        <Derived RootPackageName="/InitialEcuC/InitialEcuC">Config\ECUC\S32K144_Development_Start.ecuc.Initial.arxml</Derived>
     </ECUC>
     <PostBuildLoadable RTEDataFreezeChecksum="" CurrentConfigurationPhase="PRE_COMPILE"/>
     <DEVSettings>
@@ -111,7 +141,9 @@
                     </Settings>
                 </Settings>
             </Settings>
-            <Settings Name="com.vector.cfg.gui.core.generators.GeneratedModules"/>
+            <Settings Name="com.vector.cfg.gui.core.generators.GeneratedModules">
+                <Setting Value="false" Name="CanTp"/>
+            </Settings>
         </Generators>
         <Misc>
             <Settings Name="com.vector.cfg.gen.core.bswmdmigration.internal.service.BswImplVersionPersistor">
@@ -199,6 +231,9 @@
                 <Settings Name="|MICROSAR|vDem42">
                     <Setting Value="1.2.0" Name="BswImplSwVersion"/>
                 </Settings>
+            </Settings>
+            <Settings Name="com.vector.cfg.gen.core.gencore.internal.aov.AutomaticOnDemandValidationConfigurationService">
+                <Setting Value="rO0ABXNyAGpjb20udmVjdG9yLmNmZy5nZW4uY29yZS5nZW5jb3JlLmludGVybmFsLmFvdi5BdXRv&#xA;bWF0aWNPbkRlbWFuZFZhbGlkYXRpb25Db25maWd1cmF0aW9uU2VydmljZSRQZXJzaXN0ZWREYXRh&#xA;pcjrmQ6cuakCAAJaAAlhY3RpdmF0ZWRMABJkZWFjdGl2YXRlZE1vZHVsZXN0ABZMamF2YS91dGls&#xA;L0NvbGxlY3Rpb247eHABc3IANmNvbS5nb29nbGUuY29tbW9uLmNvbGxlY3QuSW1tdXRhYmxlTGlz&#xA;dCRTZXJpYWxpemVkRm9ybQAAAAAAAAAAAgABWwAIZWxlbWVudHN0ABNbTGphdmEvbGFuZy9PYmpl&#xA;Y3Q7eHB1cgATW0xqYXZhLmxhbmcuT2JqZWN0O5DOWJ8QcylsAgAAeHAAAAAA" Name="Data"/>
             </Settings>
             <Settings Name="com.vector.cfg.gui.pse.pages.generators">
                 <Settings Name="BuildVipProject"/>

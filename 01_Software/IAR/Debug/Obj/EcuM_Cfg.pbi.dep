@@ -14,6 +14,9 @@ EcuM_Cfg.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include/Cdd_Com_Compiler_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\Os_Compiler_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_UserTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common\ComStack_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common/Std_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\ComStack_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_DataHandleType.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\EcuM_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include\MemMap.h \
@@ -57,4 +60,11 @@ EcuM_Cfg.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\MCAL\Mcu_TS_T40D2M10I1R0\include/Mcu_CMU_IPVersion.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Mcal_S32k\Mcu_MemMap.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Det\Det.h \
-  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\Det_Cfg.h
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\Det_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\ComM\ComM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\ComM_Lcfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/ComM_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\ComM\ComM_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\ComM_GenTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components\Rte_ComM_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\ComM_PBcfg.h

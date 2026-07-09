@@ -18,8 +18,6 @@ D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\I
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanSM
 -I
-D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanTp
--I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanTrcv_30_Tja1043
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Com
@@ -27,10 +25,6 @@ D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\ComM
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Crc
--I
-D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Dcm
--I
-D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Dem
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Det
 -I
@@ -124,8 +118,6 @@ D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\B
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\CanSM
 -I
-D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\CanTp
--I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\CanTrcv_30_Tja1043
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\Com
@@ -133,10 +125,6 @@ D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\B
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\ComM
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\Crc
--I
-D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\Dcm
--I
-D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\Dem
 -I
 D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\BSW\Det
 -I

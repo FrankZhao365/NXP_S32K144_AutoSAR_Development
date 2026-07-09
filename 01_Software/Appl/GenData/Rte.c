@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  Rte.c
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -31,15 +31,22 @@
 #include "Rte_Main.h"
 
 #include "Rte_BswM.h"
+#include "Rte_ComM.h"
 #include "Rte_Ct_LEDCtrl.h"
 #include "Rte_Det.h"
 #include "Rte_EcuM.h"
 #include "Rte_Os_OsCore0_swc.h"
 #include "SchM_BswM.h"
+#include "SchM_Can.h"
+#include "SchM_CanIf.h"
+#include "SchM_CanSM.h"
+#include "SchM_Com.h"
+#include "SchM_ComM.h"
 #include "SchM_Det.h"
 #include "SchM_Dio.h"
 #include "SchM_EcuM.h"
 #include "SchM_Mcu.h"
+#include "SchM_PduR.h"
 #include "SchM_Port.h"
 
 #include "Rte_Hook.h"
@@ -81,19 +88,6 @@
 #else
 # define Rte_EnableOSInterrupts() ResumeOSInterrupts()   /* AUTOSAR OS */
 #endif
-
-
-/**********************************************************************************************************************
- * Buffers for unqueued S/R
- *********************************************************************************************************************/
-
-#define RTE_START_SEC_VAR_NOINIT_UNSPECIFIED
-#include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
-
-VAR(BswM_ESH_RunRequest, RTE_VAR_NOINIT) Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode; /* PRQA S 0850, 3408, 1504 */ /* MD_MSR_19.8, MD_Rte_3408, MD_MSR_8.10 */
-
-#define RTE_STOP_SEC_VAR_NOINIT_UNSPECIFIED
-#include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
 
 
 /**********************************************************************************************************************
@@ -159,7 +153,8 @@ VAR(BswM_ESH_Mode, RTE_VAR_NOINIT) Rte_ModeMachine_BswM_Switch_ESH_ModeSwitch_Bs
 
 #define RTE_CONST_MSEC_SystemTimer_0 (0UL)
 #define RTE_CONST_MSEC_SystemTimer_10 (10UL)
-#define RTE_CONST_MSEC_SystemTimer_500 (500UL)
+#define RTE_CONST_MSEC_SystemTimer_100 (100UL)
+#define RTE_CONST_MSEC_SystemTimer_20 (20UL)
 
 
 /**********************************************************************************************************************
@@ -193,14 +188,12 @@ FUNC(void, RTE_CODE) SchM_Init(void)
 
   /* activate the alarms used for TimingEvents */
   (void)SetRelAlarm(Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms, RTE_MSEC_SystemTimer(0) + (TickType)1, RTE_MSEC_SystemTimer(10)); /* PRQA S 3417 */ /* MD_Rte_Os */
+  (void)SetRelAlarm(Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms, RTE_MSEC_SystemTimer(0) + (TickType)1, RTE_MSEC_SystemTimer(20)); /* PRQA S 3417 */ /* MD_Rte_Os */
 
 }
 
 FUNC(Std_ReturnType, RTE_CODE) Rte_Start(void) /* PRQA S 0850 */ /* MD_MSR_19.8 */
 {
-  /* set default values for internal data */
-  Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode = 0U;
-
   /* reset Tx Ack Flags */
   Rte_AckFlagsInit();
   Rte_AckFlags.Rte_ModeSwitchAck_BswM_Switch_ESH_ModeSwitch_BswM_MDGP_ESH_Mode_Ack = 1;
@@ -213,7 +206,7 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Start(void) /* PRQA S 0850 */ /* MD_MSR_19.8 
   (void)ActivateTask(OsTask_APP); /* PRQA S 3417 */ /* MD_Rte_Os */
 
   /* activate the alarms used for TimingEvents */
-  (void)SetRelAlarm(Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable, RTE_MSEC_SystemTimer(0) + (TickType)1, RTE_MSEC_SystemTimer(500)); /* PRQA S 3417 */ /* MD_Rte_Os */
+  (void)SetRelAlarm(Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable, RTE_MSEC_SystemTimer(0) + (TickType)1, RTE_MSEC_SystemTimer(100)); /* PRQA S 3417 */ /* MD_Rte_Os */
 
   return RTE_E_OK;
 } /* PRQA S 6050 */ /* MD_MSR_STCAL */
@@ -230,6 +223,7 @@ FUNC(void, RTE_CODE) SchM_Deinit(void)
 {
   /* deactivate alarms */
   (void)CancelAlarm(Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms); /* PRQA S 3417 */ /* MD_Rte_Os */
+  (void)CancelAlarm(Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms); /* PRQA S 3417 */ /* MD_Rte_Os */
 
 }
 
@@ -256,13 +250,11 @@ FUNC(Std_ReturnType, RTE_CODE) Rte_Read_BswM_Request_ESH_PostRunRequest_1_reques
   return RTE_E_UNCONNECTED;
 } /* PRQA S 6010, 6030, 6050, 6080 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL, MD_MSR_STMIF */
 
-FUNC(Std_ReturnType, RTE_CODE) Rte_Read_BswM_Request_ESH_RunRequest_0_requestedMode(P2VAR(BswM_ESH_RunRequest, AUTOMATIC, RTE_BSWM_APPL_VAR) data) /* PRQA S 0850, 3673, 1505 */ /* MD_MSR_19.8, MD_Rte_Qac, MD_MSR_8.10 */
+FUNC(Std_ReturnType, RTE_CODE) Rte_Read_BswM_Request_ESH_RunRequest_0_requestedMode(P2VAR(BswM_ESH_RunRequest, AUTOMATIC, RTE_BSWM_APPL_VAR) data) /* PRQA S 0850, 3673, 1505, 3206 */ /* MD_MSR_19.8, MD_Rte_Qac, MD_MSR_8.10, MD_Rte_3206 */
 {
-  Std_ReturnType ret = RTE_E_OK;
+  *data = 0U;
 
-  *(data) = Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode;
-
-  return ret;
+  return RTE_E_OK;
 } /* PRQA S 6010, 6030, 6050, 6080 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL, MD_MSR_STMIF */
 
 FUNC(Std_ReturnType, RTE_CODE) Rte_Read_BswM_Request_ESH_RunRequest_1_requestedMode(P2VAR(BswM_ESH_RunRequest, AUTOMATIC, RTE_BSWM_APPL_VAR) data) /* PRQA S 0850, 3673, 1505, 3206 */ /* MD_MSR_19.8, MD_Rte_Qac, MD_MSR_8.10, MD_Rte_3206 */
@@ -1169,9 +1161,9 @@ TASK(OsTask_BSW_SCHM) /* PRQA S 3408, 1503 */ /* MD_Rte_3408, MD_MSR_14.1 */
 
   for(;;)
   {
-    (void)WaitEvent(Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms); /* PRQA S 3417 */ /* MD_Rte_Os */
+    (void)WaitEvent(Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms | Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms); /* PRQA S 3417 */ /* MD_Rte_Os */
     (void)GetEvent(OsTask_BSW_SCHM, &ev); /* PRQA S 3417 */ /* MD_Rte_Os */
-    (void)ClearEvent(ev & (Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms)); /* PRQA S 3417 */ /* MD_Rte_Os */
+    (void)ClearEvent(ev & (Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms | Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms)); /* PRQA S 3417 */ /* MD_Rte_Os */
 
     if ((ev & Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms) != (EventMaskType)0)
     {
@@ -1180,6 +1172,30 @@ TASK(OsTask_BSW_SCHM) /* PRQA S 3408, 1503 */ /* MD_Rte_3408, MD_MSR_14.1 */
 
       /* call runnable */
       BswM_MainFunction();
+
+      /* call schedulable entity */
+      Can_MainFunction_BusOff();
+
+      /* call schedulable entity */
+      Can_MainFunction_Mode();
+
+      /* call schedulable entity */
+      Can_MainFunction_Wakeup();
+
+      /* call schedulable entity */
+      CanSM_MainFunction();
+
+      /* call schedulable entity */
+      Com_MainFunctionRx();
+
+      /* call schedulable entity */
+      Com_MainFunctionTx();
+    }
+
+    if ((ev & Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms) != (EventMaskType)0)
+    {
+      /* call runnable */
+      ComM_MainFunction_0();
     }
   }
 } /* PRQA S 6010, 6030, 6050, 6080 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL, MD_MSR_STMIF */

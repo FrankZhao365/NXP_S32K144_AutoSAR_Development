@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  Rte_Ct_LEDCtrl_Type.h
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -42,6 +42,18 @@ extern "C"
 
 #  ifndef REQUESTED
 #   define REQUESTED (1U)
+#  endif
+
+#  ifndef COMM_NO_COMMUNICATION
+#   define COMM_NO_COMMUNICATION (0U)
+#  endif
+
+#  ifndef COMM_SILENT_COMMUNICATION
+#   define COMM_SILENT_COMMUNICATION (1U)
+#  endif
+
+#  ifndef COMM_FULL_COMMUNICATION
+#   define COMM_FULL_COMMUNICATION (2U)
 #  endif
 
 # endif /* RTE_CORE */

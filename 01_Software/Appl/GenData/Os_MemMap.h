@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Os_MemMap.h
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-08 01:58:09
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -91,6 +91,62 @@
 # undef OS_OS_COREINITHOOK_CODE_OPEN /* PRQA S 0841 */ /* MD_MSR_19.6 */
 # pragma default_function_attributes = /* PRQA S 3116 */ /* MD_MSR_1.1 */
 # undef OS_STOP_SEC_OS_COREINITHOOK_CODE /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# undef MEMMAP_ERROR /* PRQA S 0841 */ /* MD_MSR_19.6 */
+#endif
+
+#ifdef OS_START_SEC_CanBusOffIsr_0_CODE /* PRQA S 0883 */ /* MD_Os_0883 */
+# ifdef OS_MEMMAP_SECTION_OPEN
+#  error A MemMap section is already open. Nesting is not supported.
+# endif
+# define OS_MEMMAP_SECTION_OPEN
+# define OS_CanBusOffIsr_0_CODE_OPEN
+# ifndef MEMMAP_ERROR
+#  error Each MemMap include may only perform one action. Include MemMap.h separately for each action.
+# endif
+# undef MEMMAP_ERROR /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# pragma default_function_attributes = @ ".OS_CanBusOffIsr_0_CODE" /* PRQA S 0289, 3116 */ /* MD_Os_0289_LinkerSymbol, MD_MSR_1.1 */
+# undef OS_START_SEC_CanBusOffIsr_0_CODE /* PRQA S 0841 */ /* MD_MSR_19.6 */
+#endif
+
+#ifdef OS_STOP_SEC_CanBusOffIsr_0_CODE /* PRQA S 0883 */ /* MD_Os_0883 */
+# ifndef OS_MEMMAP_SECTION_OPEN
+#  error No MemMap section is currently opened.
+# endif
+# undef OS_MEMMAP_SECTION_OPEN /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# ifndef OS_CanBusOffIsr_0_CODE_OPEN
+#  error Section OS_CanBusOffIsr_0_CODE is currently not opened and so cannot be closed.
+# endif
+# undef OS_CanBusOffIsr_0_CODE_OPEN /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# pragma default_function_attributes = /* PRQA S 3116 */ /* MD_MSR_1.1 */
+# undef OS_STOP_SEC_CanBusOffIsr_0_CODE /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# undef MEMMAP_ERROR /* PRQA S 0841 */ /* MD_MSR_19.6 */
+#endif
+
+#ifdef OS_START_SEC_CanMailboxIsr_0_CODE /* PRQA S 0883 */ /* MD_Os_0883 */
+# ifdef OS_MEMMAP_SECTION_OPEN
+#  error A MemMap section is already open. Nesting is not supported.
+# endif
+# define OS_MEMMAP_SECTION_OPEN
+# define OS_CanMailboxIsr_0_CODE_OPEN
+# ifndef MEMMAP_ERROR
+#  error Each MemMap include may only perform one action. Include MemMap.h separately for each action.
+# endif
+# undef MEMMAP_ERROR /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# pragma default_function_attributes = @ ".OS_CanMailboxIsr_0_CODE" /* PRQA S 0289, 3116 */ /* MD_Os_0289_LinkerSymbol, MD_MSR_1.1 */
+# undef OS_START_SEC_CanMailboxIsr_0_CODE /* PRQA S 0841 */ /* MD_MSR_19.6 */
+#endif
+
+#ifdef OS_STOP_SEC_CanMailboxIsr_0_CODE /* PRQA S 0883 */ /* MD_Os_0883 */
+# ifndef OS_MEMMAP_SECTION_OPEN
+#  error No MemMap section is currently opened.
+# endif
+# undef OS_MEMMAP_SECTION_OPEN /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# ifndef OS_CanMailboxIsr_0_CODE_OPEN
+#  error Section OS_CanMailboxIsr_0_CODE is currently not opened and so cannot be closed.
+# endif
+# undef OS_CanMailboxIsr_0_CODE_OPEN /* PRQA S 0841 */ /* MD_MSR_19.6 */
+# pragma default_function_attributes = /* PRQA S 3116 */ /* MD_MSR_1.1 */
+# undef OS_STOP_SEC_CanMailboxIsr_0_CODE /* PRQA S 0841 */ /* MD_MSR_19.6 */
 # undef MEMMAP_ERROR /* PRQA S 0841 */ /* MD_MSR_19.6 */
 #endif
 

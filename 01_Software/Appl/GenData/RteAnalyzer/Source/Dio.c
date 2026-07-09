@@ -66,10 +66,15 @@
  *
  * Primitive Types:
  * ================
+ * ComM_InhibitionStatusType: Integer in interval [0...255]
+ * ComM_UserHandleType: Integer in interval [0...255]
  * CounterType: Integer in interval [0...255]
  * EcuM_TimeType: Integer in interval [0...4294967295]
  * EcuM_UserType: Integer in interval [0...255]
+ * NetworkHandleType: Integer in interval [0...255]
  * TimeInMicrosecondsType: Integer in interval [0...4294967295]
+ * boolean: Boolean (standard type)
+ * uint16: Integer in interval [0...65535] (standard type)
  * uint32: Integer in interval [0...4294967295] (standard type)
  * uint8: Integer in interval [0...255] (standard type)
  *
@@ -77,6 +82,7 @@
  * ==================
  * BswM_ESH_Mode: Enumeration of integer in interval [0...255] with enumerators
  * BswM_ESH_RunRequest: Enumeration of integer in interval [0...255] with enumerators
+ * ComM_ModeType: Enumeration of integer in interval [0...3] with enumerators
  * EcuM_BootTargetType: Enumeration of integer in interval [0...2] with enumerators
  * EcuM_ModeType: Enumeration of integer in interval [0...3] with enumerators
  * EcuM_ShutdownCauseType: Enumeration of integer in interval [0...3] with enumerators

@@ -353,13 +353,10 @@
                     <state>$PROJ_DIR$\..\BSW\Can</state>
                     <state>$PROJ_DIR$\..\BSW\CanIf</state>
                     <state>$PROJ_DIR$\..\BSW\CanSM</state>
-                    <state>$PROJ_DIR$\..\BSW\CanTp</state>
                     <state>$PROJ_DIR$\..\BSW\CanTrcv_30_Tja1043</state>
                     <state>$PROJ_DIR$\..\BSW\Com</state>
                     <state>$PROJ_DIR$\..\BSW\ComM</state>
                     <state>$PROJ_DIR$\..\BSW\Crc</state>
-                    <state>$PROJ_DIR$\..\BSW\Dcm</state>
-                    <state>$PROJ_DIR$\..\BSW\Dem</state>
                     <state>$PROJ_DIR$\..\BSW\Det</state>
                     <state>$PROJ_DIR$\..\BSW\Ea</state>
                     <state>$PROJ_DIR$\..\BSW\EcuM</state>
@@ -677,13 +674,10 @@
                     <state>$PROJ_DIR$\..\BSW\Can</state>
                     <state>$PROJ_DIR$\..\BSW\CanIf</state>
                     <state>$PROJ_DIR$\..\BSW\CanSM</state>
-                    <state>$PROJ_DIR$\..\BSW\CanTp</state>
                     <state>$PROJ_DIR$\..\BSW\CanTrcv_30_Tja1043</state>
                     <state>$PROJ_DIR$\..\BSW\Com</state>
                     <state>$PROJ_DIR$\..\BSW\ComM</state>
                     <state>$PROJ_DIR$\..\BSW\Crc</state>
-                    <state>$PROJ_DIR$\..\BSW\Dcm</state>
-                    <state>$PROJ_DIR$\..\BSW\Dem</state>
                     <state>$PROJ_DIR$\..\BSW\Det</state>
                     <state>$PROJ_DIR$\..\BSW\Ea</state>
                     <state>$PROJ_DIR$\..\BSW\EcuM</state>
@@ -2240,6 +2234,33 @@
                 <name>$PROJ_DIR$\..\Appl\GenData\BswM_PBcfg.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\Can_Lcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\Can_PBcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\CanIf_Lcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\CanIf_PBcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\CanSM_Lcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\Com_Lcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\Com_PBcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\ComM_Lcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\ComM_PBcfg.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Appl\GenData\Det_Cfg.c</name>
             </file>
             <file>
@@ -2345,6 +2366,12 @@
                 <name>$PROJ_DIR$\..\Appl\GenData\Os_XSignal_Lcfg.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\PduR_Lcfg.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\GenData\PduR_PBcfg.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Appl\GenData\Rte.c</name>
             </file>
         </group>
@@ -2357,10 +2384,16 @@
                 <name>$PROJ_DIR$\..\Appl\Source\Ct_LEDCtrl.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Appl\Source\CtLedTask.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Appl\Source\EcuM_Callout_Stubs.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Appl\Source\Os_Callout_Stubs.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Appl\Source\OsAppTask.c</name>
             </file>
         </group>
         <file>
@@ -2376,6 +2409,60 @@
             <name>BswM</name>
             <file>
                 <name>$PROJ_DIR$\..\BSW\BswM\BswM.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanTp\CanTp.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanTp\CanTp_Cbk.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanTp\CanTp_Priv.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanTp\CanTp_Types.h</name>
+            </file>
+        </group>
+        <group>
+            <name>CAN</name>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\Can\Can.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\Can\Can_Irq.c</name>
+            </file>
+        </group>
+        <group>
+            <name>CANIF</name>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanIf\CanIf.c</name>
+            </file>
+        </group>
+        <group>
+            <name>CANSM</name>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanSM\CanSM.c</name>
+            </file>
+        </group>
+        <group>
+            <name>CanTrcv_TJA1043</name>
+            <excluded>
+                <configuration>Debug</configuration>
+            </excluded>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\CanTrcv_30_Tja1043\CanTrcv_30_Tja1043.c</name>
+            </file>
+        </group>
+        <group>
+            <name>COM</name>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\Com\Com.c</name>
+            </file>
+        </group>
+        <group>
+            <name>ComM</name>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\ComM\ComM.c</name>
             </file>
         </group>
         <group>
@@ -2526,6 +2613,36 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\BSW\Os\Os_XSignal.c</name>
+            </file>
+        </group>
+        <group>
+            <name>PDUR</name>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_Bm.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_Fm.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_Lock.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_McQ.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_RmIf.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_RmTp.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_RmTp_TxInst.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\BSW\PduR\PduR_Sm.c</name>
             </file>
         </group>
         <group>

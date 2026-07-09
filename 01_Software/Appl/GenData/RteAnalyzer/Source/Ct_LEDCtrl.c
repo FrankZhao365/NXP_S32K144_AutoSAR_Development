@@ -53,6 +53,9 @@
  * BswM_ESH_RunRequest
  *   
  *
+ * ComM_ModeType
+ *   
+ *
  *********************************************************************************************************************/
 
 #include "Rte_Ct_LEDCtrl.h" /* PRQA S 0857 */ /* MD_MSR_1.1_857 */
@@ -88,6 +91,10 @@ static void Ct_LEDCtrl_TestDefines(void);
  * BswM_ESH_RunRequest: Enumeration of integer in interval [0...255] with enumerators
  *   RELEASED (0U)
  *   REQUESTED (1U)
+ * ComM_ModeType: Enumeration of integer in interval [0...3] with enumerators
+ *   COMM_NO_COMMUNICATION (0U)
+ *   COMM_SILENT_COMMUNICATION (1U)
+ *   COMM_FULL_COMMUNICATION (2U)
  *
  *********************************************************************************************************************/
 
@@ -102,6 +109,16 @@ static void Ct_LEDCtrl_TestDefines(void);
  *---------------------------------------------------------------------------------------------------------------------
  *
  * Executed once after the RTE is started
+ *
+ **********************************************************************************************************************
+ *
+ * Service Calls:
+ * ==============
+ *   Service Invocation:
+ *   -------------------
+ *   Std_ReturnType Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(ComM_ModeType ComMode)
+ *     Synchronous Service Invocation. Timeout: None
+ *     Returned Application Errors: RTE_E_ComM_UserRequest_E_MODE_LIMITATION, RTE_E_ComM_UserRequest_E_NOT_OK
  *
  *********************************************************************************************************************/
 /**********************************************************************************************************************
@@ -121,6 +138,33 @@ FUNC(void, Ct_LEDCtrl_CODE) Ct_LEDCtrl_Init(void) /* PRQA S 0850 */ /* MD_MSR_19
  * Symbol: Ct_LEDCtrl_Init
  *********************************************************************************************************************/
 
+  Std_ReturnType fct_status;
+  boolean fct_error = 0;
+
+  /*************************************************
+  * Direct Function Accesses
+  *************************************************/
+
+  fct_status = TSC_Ct_LEDCtrl_Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(0U);
+  switch (fct_status)
+  {
+    case RTE_E_OK:
+      fct_error = 0;
+      break;
+    case RTE_E_UNCONNECTED:
+      fct_error = 1;
+      break;
+    case RTE_E_TIMEOUT:
+      fct_error = 1;
+      break;
+    case RTE_E_ComM_UserRequest_E_MODE_LIMITATION:
+      fct_error = 1;
+      break;
+    case RTE_E_ComM_UserRequest_E_NOT_OK:
+      fct_error = 1;
+      break;
+  }
+
   Ct_LEDCtrl_TestDefines();
 
 
@@ -136,15 +180,7 @@ FUNC(void, Ct_LEDCtrl_CODE) Ct_LEDCtrl_Init(void) /* PRQA S 0850 */ /* MD_MSR_19
  *---------------------------------------------------------------------------------------------------------------------
  *
  * Executed if at least one of the following trigger conditions occurred:
- *   - triggered on TimingEvent every 500ms
- *
- **********************************************************************************************************************
- *
- * Output Interfaces:
- * ==================
- *   Explicit S/R API:
- *   -----------------
- *   Std_ReturnType Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(BswM_ESH_RunRequest data)
+ *   - triggered on TimingEvent every 100ms
  *
  *********************************************************************************************************************/
 /**********************************************************************************************************************
@@ -163,24 +199,6 @@ FUNC(void, Ct_LEDCtrl_CODE) LedCtrl_Runnable(void) /* PRQA S 0850 */ /* MD_MSR_1
  * DO NOT CHANGE THIS COMMENT!           << Start of runnable implementation >>             DO NOT CHANGE THIS COMMENT!
  * Symbol: LedCtrl_Runnable
  *********************************************************************************************************************/
-
-  Std_ReturnType fct_status;
-  boolean fct_error = 0;
-
-  BswM_ESH_RunRequest Write_CtLed_Request_ESH_RunRequest_0_requestedMode;
-
-  /*************************************************
-  * Direct Function Accesses
-  *************************************************/
-
-  (void)memset(&Write_CtLed_Request_ESH_RunRequest_0_requestedMode, 0, sizeof(Write_CtLed_Request_ESH_RunRequest_0_requestedMode));
-  fct_status = TSC_Ct_LEDCtrl_Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(Write_CtLed_Request_ESH_RunRequest_0_requestedMode);
-  switch (fct_status)
-  {
-    case RTE_E_OK:
-      fct_error = 0;
-      break;
-  }
 
 
 /**********************************************************************************************************************
@@ -203,6 +221,10 @@ static void Ct_LEDCtrl_TestDefines(void)
 
   BswM_ESH_RunRequest Test_BswM_ESH_RunRequest_V_1 = RELEASED;
   BswM_ESH_RunRequest Test_BswM_ESH_RunRequest_V_2 = REQUESTED;
+
+  ComM_ModeType Test_ComM_ModeType_V_1 = COMM_NO_COMMUNICATION;
+  ComM_ModeType Test_ComM_ModeType_V_2 = COMM_SILENT_COMMUNICATION;
+  ComM_ModeType Test_ComM_ModeType_V_3 = COMM_FULL_COMMUNICATION;
 }
 
 /**********************************************************************************************************************

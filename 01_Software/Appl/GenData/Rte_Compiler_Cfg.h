@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  Rte_Compiler_Cfg.h
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -137,6 +137,65 @@
 
 /* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
 # define BswM_VAR_ZERO_INIT
+
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!      << End of compiler abstraction implementation >>        DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!     << Start of compiler abstraction implementation >>       DO NOT CHANGE THIS COMMENT!
+ * Symbol: RTE_COMM_APPL
+ *********************************************************************************************************************/
+
+/* used for references on application variables */
+# define RTE_COMM_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_COMM_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_COMM_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_COMM_APPL_CONST
+
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!      << End of compiler abstraction implementation >>        DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!     << Start of compiler abstraction implementation >>       DO NOT CHANGE THIS COMMENT!
+ * Symbol: ComM_CODE
+ *********************************************************************************************************************/
+
+/* used for SWC specific code */
+# define ComM_CODE
+
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!      << End of compiler abstraction implementation >>        DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!     << Start of compiler abstraction implementation >>       DO NOT CHANGE THIS COMMENT!
+ * Symbol: ComM_CONST
+ *********************************************************************************************************************/
+
+/* used for global or static SWC specific constants */
+# define ComM_CONST
+
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!      << End of compiler abstraction implementation >>        DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!     << Start of compiler abstraction implementation >>       DO NOT CHANGE THIS COMMENT!
+ * Symbol: ComM_VAR
+ *********************************************************************************************************************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define ComM_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define ComM_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define ComM_VAR_ZERO_INIT
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!      << End of compiler abstraction implementation >>        DO NOT CHANGE THIS COMMENT!
@@ -383,6 +442,314 @@
  * DO NOT CHANGE THIS COMMENT!           << Start of removed code area >>                   DO NOT CHANGE THIS COMMENT!
  *********************************************************************************************************************/
 
+
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:RTE_OSAPPTASK_APPL)  *****************/
+
+/* used for references on application variables */
+# define RTE_OSAPPTASK_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_OSAPPTASK_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_OSAPPTASK_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_OSAPPTASK_APPL_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:OsAppTask_CODE)  *********************/
+
+/* used for SWC specific code */
+# define OsAppTask_CODE
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:OsAppTask_CONST)  ********************/
+
+/* used for global or static SWC specific constants */
+# define OsAppTask_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:OsAppTask_VAR)  **********************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define OsAppTask_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define OsAppTask_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define OsAppTask_VAR_ZERO_INIT
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:DemMaster_0_CODE)  *******************/
+
+/* used for SWC specific code */
+# define DemMaster_0_CODE
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:CtLedTask_CONST)  ********************/
+
+/* used for global or static SWC specific constants */
+# define CtLedTask_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:RTE_DEMMASTER_0_APPL)  ***************/
+
+/* used for references on application variables */
+# define RTE_DEMMASTER_0_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_DEMMASTER_0_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_DEMMASTER_0_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_DEMMASTER_0_APPL_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:CtLedTask_CODE)  *********************/
+
+/* used for SWC specific code */
+# define CtLedTask_CODE
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:Dcm_CODE)  ***************************/
+
+/* used for SWC specific code */
+# define Dcm_CODE
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:DemMaster_0_CONST)  ******************/
+
+/* used for global or static SWC specific constants */
+# define DemMaster_0_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:CddSbc_CODE)  ************************/
+
+/* used for SWC specific code */
+# define CddSbc_CODE
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:CddSbc_VAR)  *************************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define CddSbc_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define CddSbc_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define CddSbc_VAR_ZERO_INIT
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:RTE_DCM_APPL)  ***********************/
+
+/* used for references on application variables */
+# define RTE_DCM_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_DCM_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_DCM_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_DCM_APPL_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:RTE_DEMSATELLITE_0_APPL)  ************/
+
+/* used for references on application variables */
+# define RTE_DEMSATELLITE_0_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_DEMSATELLITE_0_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_DEMSATELLITE_0_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_DEMSATELLITE_0_APPL_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:RTE_CDDSBC_APPL)  ********************/
+
+/* used for references on application variables */
+# define RTE_CDDSBC_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_CDDSBC_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_CDDSBC_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_CDDSBC_APPL_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:Dcm_CONST)  **************************/
+
+/* used for global or static SWC specific constants */
+# define Dcm_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:DemSatellite_0_VAR)  *****************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define DemSatellite_0_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define DemSatellite_0_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define DemSatellite_0_VAR_ZERO_INIT
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:DemSatellite_0_CODE)  ****************/
+
+/* used for SWC specific code */
+# define DemSatellite_0_CODE
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:CtLedTask_VAR)  **********************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define CtLedTask_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define CtLedTask_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define CtLedTask_VAR_ZERO_INIT
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:CddSbc_CONST)  ***********************/
+
+/* used for global or static SWC specific constants */
+# define CddSbc_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:Dcm_VAR)  ****************************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define Dcm_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define Dcm_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define Dcm_VAR_ZERO_INIT
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:DemSatellite_0_CONST)  ***************/
+
+/* used for global or static SWC specific constants */
+# define DemSatellite_0_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:DemMaster_0_VAR)  ********************/
+
+/* used for all global or static SWC specific variables that are not initialized by the startup code of the compiler */
+# define DemMaster_0_VAR_NOINIT
+
+/* used for global or static SWC specific variables that are initialized by the startup code of the compiler */
+# define DemMaster_0_VAR_INIT
+
+/* used for global or static SWC specific variables that are initialized with zero by the startup code of the compiler */
+# define DemMaster_0_VAR_ZERO_INIT
+
+/***  End of saved code  ************************************************************************************/
+#endif
+
+#if 0
+/***  Start of saved code (symbol: compiler abstraction implementation:RTE_CTLEDTASK_APPL)  *****************/
+
+/* used for references on application variables */
+# define RTE_CTLEDTASK_APPL_VAR
+
+/* used for references on application data (constants or variables) */
+# define RTE_CTLEDTASK_APPL_DATA
+
+/* used for references on application functions */
+# define RTE_CTLEDTASK_APPL_CODE
+
+/* used for references on application constants */
+# define RTE_CTLEDTASK_APPL_CONST
+
+/***  End of saved code  ************************************************************************************/
+#endif
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           << End of removed code area >>                     DO NOT CHANGE THIS COMMENT!

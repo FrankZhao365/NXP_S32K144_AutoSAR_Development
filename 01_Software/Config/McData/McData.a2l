@@ -11,7 +11,7 @@
  *  ---------------------------------------------------------------------------------------------------------------- *
  *             File: McData.a2l                                                                                      *
  *      Description: MICROSAR A2L file                                                                               *
- *     Generated at: 2026-06-25 21:32:24                                                                             *
+ *     Generated at: 2026-07-05 13:39:56                                                                             *
  *        Generator: MICROSAR McDataConverter, Version 1.0.13.0                                                      *
  *  ---------------------------------------------------------------------------------------------------------------- *
  *  CUSTOMER INFORMATION                                                                                             *
@@ -143,7 +143,52 @@
 /end GROUP
 
 /begin GROUP 
+    CanIf                                         /* Name */
+    ""                                 /* Long Identifier */
+    /begin REF_CHARACTERISTIC 
+    /end REF_CHARACTERISTIC
+    /begin REF_MEASUREMENT 
+    /end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP 
+    CanSM                                         /* Name */
+    ""                                 /* Long Identifier */
+    /begin REF_CHARACTERISTIC 
+    /end REF_CHARACTERISTIC
+    /begin REF_MEASUREMENT 
+    /end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP 
+    Com                                           /* Name */
+    ""                                 /* Long Identifier */
+    /begin REF_CHARACTERISTIC 
+    /end REF_CHARACTERISTIC
+    /begin REF_MEASUREMENT 
+    /end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP 
+    ComM                                          /* Name */
+    ""                                 /* Long Identifier */
+    /begin REF_CHARACTERISTIC 
+    /end REF_CHARACTERISTIC
+    /begin REF_MEASUREMENT 
+    /end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP 
     EcuM                                          /* Name */
+    ""                                 /* Long Identifier */
+    /begin REF_CHARACTERISTIC 
+    /end REF_CHARACTERISTIC
+    /begin REF_MEASUREMENT 
+    /end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP 
+    PduR                                          /* Name */
     ""                                 /* Long Identifier */
     /begin REF_CHARACTERISTIC 
     /end REF_CHARACTERISTIC

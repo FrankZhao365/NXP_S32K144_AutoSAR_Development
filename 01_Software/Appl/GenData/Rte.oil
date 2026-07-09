@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  Rte.oil
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -52,6 +52,7 @@
 // TIMING_PROTECTION = FALSE|TRUE; (AUTOSAR OS only)
       AUTOSTART = FALSE:"@RO@";
       EVENT = Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms:"@RO@";
+      EVENT = Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms:"@RO@";
    }:"@RO@@NR@";
 
    ALARM Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms {
@@ -64,7 +65,21 @@
       AUTOSTART = FALSE:"@RO@";
    }:"@RO@@NR@";
 
+   ALARM Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms {
+      COUNTER = SystemTimer;
+      ACTION = SETEVENT
+      {
+         TASK = OsTask_BSW_SCHM;
+         EVENT = Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms;
+      }:"@ROC@";
+      AUTOSTART = FALSE:"@RO@";
+   }:"@RO@@NR@";
+
    EVENT Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_10ms {
+      MASK = AUTO;
+   }:"@ROC@@NR@";
+
+   EVENT Rte_Ev_Cyclic2_OsTask_BSW_SCHM_0_20ms {
       MASK = AUTO;
    }:"@ROC@@NR@";
 

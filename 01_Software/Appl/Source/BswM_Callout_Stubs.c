@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: BswM_Callout_Stubs.c
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-05 13:39:39
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -153,6 +153,32 @@ FUNC(void, BSWM_CODE) BswM_ESH_OnEnterWaitForNvm(void)
  *********************************************************************************************************************/
 
 } /* End of BswM_ESH_OnEnterWaitForNvm */
+
+
+FUNC(void, BSWM_CODE) ESH_ComM_CheckPendingRequests(void)
+{
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!           <USERBLOCK ESH_ComM_CheckPendingRequests>          DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+
+
+/**********************************************************************************************************************
+ * DO NOT CHANGE THIS COMMENT!           </USERBLOCK>                                       DO NOT CHANGE THIS COMMENT!
+ *********************************************************************************************************************/
+  ComM_StateType CN_CAN00_5e566ad9 = COMM_NO_COM_NO_PENDING_REQUEST;
+  
+  (void)ComM_GetState(ComMConf_ComMChannel_CN_CAN00_5e566ad9, &CN_CAN00_5e566ad9); /* SBSW_BSWM_FCTCALL_LOCALVAR */
+  
+  if(CN_CAN00_5e566ad9 != COMM_NO_COM_NO_PENDING_REQUEST)
+  {
+    BswM_RequestMode(BSWM_GENERIC_ESH_ComMPendingRequests, BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_PENDING_REQUEST);
+  }
+  else
+  {
+    BswM_RequestMode(BSWM_GENERIC_ESH_ComMPendingRequests, BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_NO_REQUEST);
+  }
+  
+} /* End of ESH_ComM_CheckPendingRequests */
 
 
 #define BSWM_STOP_SEC_CODE

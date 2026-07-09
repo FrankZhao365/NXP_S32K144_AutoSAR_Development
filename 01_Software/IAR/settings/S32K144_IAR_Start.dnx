@@ -50,15 +50,15 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>2721458474</Checksum>
+        <Checksum>1144187194</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
         <StopOnThrow>_ 0</StopOnThrow>
     </Exceptions>
     <Disassembly>
-        <InstrCount>0</InstrCount>
         <MixedMode>1</MixedMode>
+        <InstrCount>0</InstrCount>
     </Disassembly>
     <CodeCoverage>
         <Enabled>0</Enabled>
@@ -68,6 +68,10 @@
     <CallStack>
         <ShowArgs>0</ShowArgs>
     </CallStack>
+    <watch_formats>
+        <Fmt0>{W}1:0x1FFFB006	4	0</Fmt0>
+        <Fmt1>{W}1:led_runtime_cnt	2	0</Fmt1>
+    </watch_formats>
     <TermIOLog>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>

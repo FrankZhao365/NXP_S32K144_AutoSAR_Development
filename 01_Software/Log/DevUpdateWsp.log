@@ -1,0 +1,25 @@
+﻿04 Jul 2026 17:16:46 - Opening workspace 'C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dcf'...
+04 Jul 2026 17:16:53 - Loading file PlatformTypes_AR4.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\AUTOSAR\PlatformTypes_AR4.arxml)
+04 Jul 2026 17:16:53 - Loading file BswM_swc.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\ServiceComponents\BswM_swc.arxml)
+04 Jul 2026 17:16:53 - Loading file ComM_swc.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\ServiceComponents\ComM_swc.arxml)
+04 Jul 2026 17:16:53 - Loading file Det_swc.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\ServiceComponents\Det_swc.arxml)
+04 Jul 2026 17:16:53 - Loading file EcuM_swc.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\ServiceComponents\EcuM_swc.arxml)
+04 Jul 2026 17:16:53 - Loading file Os_swc.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\ServiceComponents\Os_swc.arxml)
+04 Jul 2026 17:16:53 - Loading file Ct_LEDCtrl.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\Ct_LEDCtrl.arxml)
+04 Jul 2026 17:16:53 - Loading file DataTypes.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\DataTypes.arxml)
+04 Jul 2026 17:16:53 - Loading file Packages.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\Packages.arxml)
+04 Jul 2026 17:16:53 - Loading file PortInterfaces.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\PortInterfaces.arxml)
+04 Jul 2026 17:16:53 - Loading file S32K144_Development_Start.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.arxml)
+04 Jul 2026 17:16:56 - Opened workspace 'C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dcf' successfully.
+04 Jul 2026 17:16:58 - Start import
+04 Jul 2026 17:16:58 - Importing file (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\System\SystemExtract.arxml).
+04 Jul 2026 17:16:58 - Merging imported data
+04 Jul 2026 17:17:01 - Finished import
+04 Jul 2026 17:17:01 - Saving workspace 'C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dcf'...
+04 Jul 2026 17:17:01 - Saving file S32K144_Development_Start.dvg (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dvg)
+04 Jul 2026 17:17:01 - Saving file DataTypes.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\DataTypes.arxml)
+04 Jul 2026 17:17:02 - Saving file Packages.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\Packages.arxml)
+04 Jul 2026 17:17:02 - Saving file S32K144_Development_Start.arxml (C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.arxml)
+04 Jul 2026 17:17:02 - Saved workspace 'C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dcf' successfully.
+04 Jul 2026 17:17:02 - Closing workspace 'C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dcf'...
+04 Jul 2026 17:17:02 - Closed workspace 'C:\Users\Frank\AppData\Local\Temp\DaVinci\Cfg-9826071\Workflow\1783156549853-0\Config\Developer\S32K144_Development_Start.dcf' successfully.

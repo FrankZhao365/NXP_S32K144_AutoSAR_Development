@@ -24,6 +24,31 @@
               </PROVIDED-COM-SPECS>
               <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/MICROSAR/BswM_swc/Interfaces/BswM_SRI_BswM_MSI_ESH_RunRequest_BswM_MDGP_ESH_RunRequest</PROVIDED-INTERFACE-TREF>
             </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE UUID="0069BA0C-A277-4BF4-A108-2E49550AA798">
+              <SHORT-NAME>UR_CN_CAN00_06ecbb07</SHORT-NAME>
+              <ADMIN-DATA>
+                <SDGS>
+                  <SDG GID="DV:DEV">
+                    <SD GID="DV:ImportModePreset">Keep</SD>
+                  </SDG>
+                </SDGS>
+              </ADMIN-DATA>
+              <REQUIRED-COM-SPECS>
+                <CLIENT-COM-SPEC>
+                  <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/ComM_swc/Interfaces/ComM_UserRequest/RequestComMode</OPERATION-REF>
+                </CLIENT-COM-SPEC>
+                <CLIENT-COM-SPEC>
+                  <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/ComM_swc/Interfaces/ComM_UserRequest/GetCurrentComMode</OPERATION-REF>
+                </CLIENT-COM-SPEC>
+                <CLIENT-COM-SPEC>
+                  <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/ComM_swc/Interfaces/ComM_UserRequest/GetMaxComMode</OPERATION-REF>
+                </CLIENT-COM-SPEC>
+                <CLIENT-COM-SPEC>
+                  <OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/ComM_swc/Interfaces/ComM_UserRequest/GetRequestedComMode</OPERATION-REF>
+                </CLIENT-COM-SPEC>
+              </REQUIRED-COM-SPECS>
+              <REQUIRED-INTERFACE-TREF DEST="CLIENT-SERVER-INTERFACE">/MICROSAR/ComM_swc/Interfaces/ComM_UserRequest</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
           </PORTS>
           <INTERNAL-BEHAVIORS>
             <SWC-INTERNAL-BEHAVIOR UUID="EAC14B92-BA07-488C-A3DF-33C1BFE16C87">
@@ -32,7 +57,7 @@
                 <TIMING-EVENT UUID="7553C3E5-9202-465B-A0A2-17622F925DCF">
                   <SHORT-NAME>TMT_LedCtrl_Runnable</SHORT-NAME>
                   <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/ComponentTypes/Ct_LEDCtrl/Ct_LEDCtrl_InternalBehavior/LedCtrl_Runnable</START-ON-EVENT-REF>
-                  <PERIOD>0.5</PERIOD>
+                  <PERIOD>0.1</PERIOD>
                 </TIMING-EVENT>
                 <INIT-EVENT UUID="BE08F465-2C0C-4774-BC44-31159415A3FF">
                   <SHORT-NAME>Ct_LEDCtrl_InitEvent</SHORT-NAME>
@@ -42,17 +67,6 @@
               <RUNNABLES>
                 <RUNNABLE-ENTITY UUID="BFFBE098-25E1-455E-B958-95702242DDF1">
                   <SHORT-NAME>LedCtrl_Runnable</SHORT-NAME>
-                  <DATA-SEND-POINTS>
-                    <VARIABLE-ACCESS UUID="513FBDAD-E079-48F0-BB0E-F2F829C63826">
-                      <SHORT-NAME>SEND_CtLed_Request_ESH_RunRequest_0_requestedMode</SHORT-NAME>
-                      <ACCESSED-VARIABLE>
-                        <AUTOSAR-VARIABLE-IREF>
-                          <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/ComponentTypes/Ct_LEDCtrl/CtLed_Request_ESH_RunRequest_0</PORT-PROTOTYPE-REF>
-                          <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/MICROSAR/BswM_swc/Interfaces/BswM_SRI_BswM_MSI_ESH_RunRequest_BswM_MDGP_ESH_RunRequest/requestedMode</TARGET-DATA-PROTOTYPE-REF>
-                        </AUTOSAR-VARIABLE-IREF>
-                      </ACCESSED-VARIABLE>
-                    </VARIABLE-ACCESS>
-                  </DATA-SEND-POINTS>
                 </RUNNABLE-ENTITY>
                 <RUNNABLE-ENTITY UUID="D157A0E7-D7D7-4512-A24C-36941752D726">
                   <SHORT-NAME>Ct_LEDCtrl_Init</SHORT-NAME>
@@ -63,6 +77,15 @@
                       </SDG>
                     </SDGS>
                   </ADMIN-DATA>
+                  <SERVER-CALL-POINTS>
+                    <SYNCHRONOUS-SERVER-CALL-POINT UUID="C4235644-462C-4839-AC6D-A642C5A82747">
+                      <SHORT-NAME>SC_UR_CN_CAN00_06ecbb07_RequestComMode</SHORT-NAME>
+                      <OPERATION-IREF>
+                        <CONTEXT-R-PORT-REF DEST="R-PORT-PROTOTYPE">/ComponentTypes/Ct_LEDCtrl/UR_CN_CAN00_06ecbb07</CONTEXT-R-PORT-REF>
+                        <TARGET-REQUIRED-OPERATION-REF DEST="CLIENT-SERVER-OPERATION">/MICROSAR/ComM_swc/Interfaces/ComM_UserRequest/RequestComMode</TARGET-REQUIRED-OPERATION-REF>
+                      </OPERATION-IREF>
+                    </SYNCHRONOUS-SERVER-CALL-POINT>
+                  </SERVER-CALL-POINTS>
                 </RUNNABLE-ENTITY>
               </RUNNABLES>
               <SUPPORTS-MULTIPLE-INSTANTIATION>false</SUPPORTS-MULTIPLE-INSTANTIATION>

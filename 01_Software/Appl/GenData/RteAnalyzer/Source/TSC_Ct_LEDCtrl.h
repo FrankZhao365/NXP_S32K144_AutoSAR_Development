@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  TSC_Ct_LEDCtrl.h
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -20,8 +20,8 @@
  *********************************************************************************************************************/
 
 
-/** Sender receiver - explicit write services */
-Std_ReturnType TSC_Ct_LEDCtrl_Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode(BswM_ESH_RunRequest data);
+/** Service interfaces */
+Std_ReturnType TSC_Ct_LEDCtrl_Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(ComM_ModeType ComMode);
 
 
 

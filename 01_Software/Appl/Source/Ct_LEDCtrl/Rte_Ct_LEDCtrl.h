@@ -11,7 +11,7 @@
  *          File:  Rte_Ct_LEDCtrl.h
  *        Config:  D:/NXP_S32K144_AutoSAR_Development/NXP_S32K144_AutoSAR_Development/01_Software/S32K144_Development_Start.dpa
  *     SW-C Type:  Ct_LEDCtrl
- *  Generated at:  Thu Jun 25 23:27:50 2026
+ *  Generated at:  Thu Jul  9 01:21:10 2026
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -64,6 +64,27 @@ extern CONSTP2CONST(struct Rte_CDS_Ct_LEDCtrl, RTE_CONST, RTE_CONST) Rte_Inst_Ct
 typedef P2CONST(struct Rte_CDS_Ct_LEDCtrl, TYPEDEF, RTE_CONST) Rte_Instance;
 
 
+# define RTE_START_SEC_CODE
+# include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+/**********************************************************************************************************************
+ * API prototypes
+ *********************************************************************************************************************/
+FUNC(Std_ReturnType, RTE_CODE) Rte_Call_Ct_LEDCtrl_UR_CN_CAN00_06ecbb07_RequestComMode(ComM_ModeType ComMode); /* PRQA S 0850 */ /* MD_MSR_19.8 */
+
+# define RTE_STOP_SEC_CODE
+# include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+
+
+/**********************************************************************************************************************
+ * Rte_Call_<p>_<o> (C/S invocation)
+ *********************************************************************************************************************/
+# define Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode Rte_Call_Ct_LEDCtrl_UR_CN_CAN00_06ecbb07_RequestComMode
+
+
+
+
 # define Ct_LEDCtrl_START_SEC_CODE
 # include "Ct_LEDCtrl_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
 
@@ -75,6 +96,16 @@ typedef P2CONST(struct Rte_CDS_Ct_LEDCtrl, TYPEDEF, RTE_CONST) Rte_Instance;
  *---------------------------------------------------------------------------------------------------------------------
  *
  * Executed once after the RTE is started
+ *
+ **********************************************************************************************************************
+ *
+ * Service Calls:
+ * ==============
+ *   Service Invocation:
+ *   -------------------
+ *   Std_ReturnType Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(ComM_ModeType ComMode)
+ *     Synchronous Service Invocation. Timeout: None
+ *     Returned Application Errors: RTE_E_ComM_UserRequest_E_MODE_LIMITATION, RTE_E_ComM_UserRequest_E_NOT_OK
  *
  *********************************************************************************************************************/
 
@@ -97,6 +128,15 @@ FUNC(void, Ct_LEDCtrl_CODE) LedCtrl_Runnable(void); /* PRQA S 0850 */ /* MD_MSR_
 
 # define Ct_LEDCtrl_STOP_SEC_CODE
 # include "Ct_LEDCtrl_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+
+/**********************************************************************************************************************
+ * Application errors
+ *********************************************************************************************************************/
+
+# define RTE_E_ComM_UserRequest_E_MODE_LIMITATION (2U)
+
+# define RTE_E_ComM_UserRequest_E_NOT_OK (1U)
 
 # ifdef __cplusplus
 } /* extern "C" */

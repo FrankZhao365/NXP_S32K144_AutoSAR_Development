@@ -10,7 +10,7 @@
  *  -------------------------------------------------------------------------------------------------------------------
  *          File:  Rte_Ct_LEDCtrl.h
  *        Config:  S32K144_Development_Start.dpa
- *   ECU-Project:  EcuInstance
+ *   ECU-Project:  MyECU
  *
  *     Generator:  MICROSAR RTE Generator Version 4.19.0
  *                 RTE Core Version 1.19.0
@@ -43,29 +43,19 @@ extern "C"
 # include "Rte_Ct_LEDCtrl_Type.h"
 # include "Rte_DataHandleType.h"
 
-# ifndef RTE_CORE
-
-/**********************************************************************************************************************
- * extern declaration of RTE buffers for optimized macro implementation
- *********************************************************************************************************************/
-#  define RTE_START_SEC_VAR_NOINIT_UNSPECIFIED
-#  include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
-
-extern VAR(BswM_ESH_RunRequest, RTE_VAR_NOINIT) Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode; /* PRQA S 0850 */ /* MD_MSR_19.8 */
-
-#  define RTE_STOP_SEC_VAR_NOINIT_UNSPECIFIED
-#  include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
-
-# endif /* !defined(RTE_CORE) */
-
 
 # ifndef RTE_CORE
 
 /**********************************************************************************************************************
- * Rte_Write_<p>_<d> (explicit S/R communication with isQueued = false)
+ * Rte_Call_<p>_<o> (unmapped) for synchronous C/S communication
  *********************************************************************************************************************/
-#  define Rte_Write_CtLed_Request_ESH_RunRequest_0_requestedMode Rte_Write_Ct_LEDCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode
-#  define Rte_Write_Ct_LEDCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode(data) (Rte_Ct_LedCtrl_CtLed_Request_ESH_RunRequest_0_requestedMode = (data), ((Std_ReturnType)RTE_E_OK)) /* PRQA S 3453 */ /* MD_MSR_19.7 */
+#  define RTE_START_SEC_COMM_APPL_CODE
+#  include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+FUNC(Std_ReturnType, RTE_COMM_APPL_CODE) ComM_RequestComMode(ComM_UserHandleType parg0, ComM_ModeType ComMode); /* PRQA S 0850 */ /* MD_MSR_19.8 */
+#  define RTE_STOP_SEC_COMM_APPL_CODE
+#  include "MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+#  define Rte_Call_UR_CN_CAN00_06ecbb07_RequestComMode(arg1) (ComM_RequestComMode((ComM_UserHandleType)0, arg1)) /* PRQA S 3453 */ /* MD_MSR_19.7 */
 
 
 # endif /* !defined(RTE_CORE) */
@@ -88,6 +78,17 @@ FUNC(void, Ct_LEDCtrl_CODE) LedCtrl_Runnable(void); /* PRQA S 0850, 3451 */ /* M
 
 # define Ct_LEDCtrl_STOP_SEC_CODE
 # include "Ct_LEDCtrl_MemMap.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+
+# ifndef RTE_CORE
+/**********************************************************************************************************************
+ * Application errors
+ *********************************************************************************************************************/
+
+#  define RTE_E_ComM_UserRequest_E_MODE_LIMITATION (2U)
+
+#  define RTE_E_ComM_UserRequest_E_NOT_OK (1U)
+# endif /* !defined(RTE_CORE) */
 
 # ifdef __cplusplus
 } /* extern "C" */

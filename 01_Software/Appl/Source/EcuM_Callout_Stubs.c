@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: EcuM_Callout_Stubs.c
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-08 01:50:06
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -55,13 +55,14 @@
  *  All configured EcuM Wakeup Sources (as bitmasks) for usage in Callouts
  *********************************************************************************************************************/
 /*
- * ECUM_WKSOURCE_NONE           (EcuM_WakeupSourceType)(0x00000000uL) 
- * ECUM_WKSOURCE_ALL_SOURCES    (EcuM_WakeupSourceType)(~((EcuM_WakeupSourceType)0x00UL)) 
- * ECUM_WKSOURCE_POWER          (EcuM_WakeupSourceType)(1uL) 
- * ECUM_WKSOURCE_RESET          (EcuM_WakeupSourceType)(2uL) 
- * ECUM_WKSOURCE_INTERNAL_RESET (EcuM_WakeupSourceType)(4uL) 
- * ECUM_WKSOURCE_INTERNAL_WDG   (EcuM_WakeupSourceType)(8uL) 
- * ECUM_WKSOURCE_EXTERNAL_WDG   (EcuM_WakeupSourceType)(16uL) 
+ * ECUM_WKSOURCE_NONE              (EcuM_WakeupSourceType)(0x00000000uL) 
+ * ECUM_WKSOURCE_ALL_SOURCES       (EcuM_WakeupSourceType)(~((EcuM_WakeupSourceType)0x00UL)) 
+ * ECUM_WKSOURCE_POWER             (EcuM_WakeupSourceType)(1uL) 
+ * ECUM_WKSOURCE_RESET             (EcuM_WakeupSourceType)(2uL) 
+ * ECUM_WKSOURCE_INTERNAL_RESET    (EcuM_WakeupSourceType)(4uL) 
+ * ECUM_WKSOURCE_INTERNAL_WDG      (EcuM_WakeupSourceType)(8uL) 
+ * ECUM_WKSOURCE_EXTERNAL_WDG      (EcuM_WakeupSourceType)(16uL) 
+ * ECUM_WKSOURCE_CN_CAN00_5e566ad9 (EcuM_WakeupSourceType)(32uL) 
  */
 
 /**********************************************************************************************************************
@@ -70,6 +71,12 @@
 #include "BswM.h" 
 #include "Det.h" 
 #include "Rte_Main.h" 
+#include "Can.h" 
+#include "CanIf.h" 
+#include "CanSM_EcuM.h" 
+#include "ComM.h" 
+#include "Com.h" 
+#include "PduR.h" 
 #include "Mcu.h" 
 #include "Port.h" 
 
@@ -232,6 +239,12 @@ FUNC(void, ECUM_CODE) EcuM_AL_DriverInitZero(void)
   Det_Init( Det_Config_Ptr );
   Det_InitMemory();
   Rte_InitMemory();
+  Can_InitMemory();
+  CanIf_InitMemory();
+  CanSM_InitMemory();
+  ComM_InitMemory();
+  Com_InitMemory();
+  PduR_InitMemory();
 
 /**********************************************************************************************************************
  * DO NOT CHANGE THIS COMMENT!           <USERBLOCK EcuM_AL_DriverInitZero>                 DO NOT CHANGE THIS COMMENT!

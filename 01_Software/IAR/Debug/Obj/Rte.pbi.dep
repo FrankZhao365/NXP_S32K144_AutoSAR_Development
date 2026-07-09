@@ -28,6 +28,9 @@ Rte.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_UserTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common\ComStack_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common/Std_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\ComStack_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_DataHandleType.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_Main.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components\Rte_BswM.h \
@@ -35,6 +38,9 @@ Rte.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\Rte_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData\Rte_DataHandleType.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components/BswM_MemMap.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components\Rte_ComM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components/Rte_ComM_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components/ComM_MemMap.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components\Rte_Ct_LEDCtrl.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components/Rte_Ct_LEDCtrl_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components/Ct_LEDCtrl_MemMap.h \
@@ -48,6 +54,16 @@ Rte.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components/Os_OsCore0_swc_MemMap.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_BswM.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_BswM_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Can.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Can_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_CanIf.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_CanIf_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_CanSM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_CanSM_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Com.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Com_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_ComM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_ComM_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Det.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Det_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Dio.h \
@@ -56,6 +72,8 @@ Rte.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_EcuM_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Mcu.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Mcu_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_PduR.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_PduR_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Port.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/SchM_Port_Type.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\Appl\GenData/Rte_Hook.h \

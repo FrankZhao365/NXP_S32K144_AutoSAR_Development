@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: BswM_Lcfg.c
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-08 01:31:47
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -46,6 +46,19 @@
 #if !defined (BSWM_LOCAL_INLINE) /* COV_BSWM_LOCAL_INLINE */
 # define BSWM_LOCAL_INLINE LOCAL_INLINE
 #endif
+
+/* -----------------------------------------------------------------------------
+    &&&~ MACROS
+ ----------------------------------------------------------------------------- */
+/* PRQA S 3453 1 */ /* MD_BswM_3453 */
+#define BswM_SetIpduGroup(pduId, bitVal) Com_SetIpduGroup(BswM_ComIPduGroupState, (pduId), (bitVal))
+#define BswM_SetIpduReinitGroup(pduId, bitVal)
+/* PRQA S 3453 1 */ /* MD_BswM_3453 */
+#define BswM_SetIpduDMGroup(pduId, bitVal) Com_SetIpduGroup(BswM_ComRxIPduGroupDMState, (pduId), (bitVal))
+
+/* PRQA S 3453 1 */ /* MD_BswM_3453 */
+#define BswM_MarkPduGroupControlInvocation(control) BswM_PduGroupControlInvocation |= (control)
+#define BswM_MarkDmControlInvocation() BswM_PduGroupControlInvocation |= BSWM_GROUPCONTROL_DM
 
 
 
@@ -72,6 +85,20 @@
  */
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_Action_RuleHandler(BswM_HandleType handleId);
 
+/**********************************************************************************************************************
+ *  BswM_UpdateRuleStates()
+ **********************************************************************************************************************/
+/*!
+ * \brief       Updates the state of a rule.
+ * \details     Set rule state of passed ruleId to passed state.
+ * \param[in]   ruleId    Id of the rule to update.
+ * \param[in]   state     New state of the rule.
+ * \pre         -
+ * \context     ANY
+ * \reentrant   TRUE
+ * \synchronous TRUE
+ */
+BSWM_LOCAL_INLINE FUNC(void, BSWM_CODE) BswM_UpdateRuleStates(BswM_SizeOfRuleStatesType ruleId, BswM_RuleStatesType state);
 
 /**********************************************************************************************************************
  *  BswM_UpdateTimer()
@@ -121,6 +148,13 @@ BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ESH_PostRunToP
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ExitPostRun(void);
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_PrepShutdownToWaitForNvM(void);
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_INIT_AL_Initialize(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_Disable(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_Disable(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Disable_DM(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Enable_DM(void);
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ExitRun(void);
 /*! \} */ /* End of sharing description for BswMActionListFunctions */
 #define BswM_ActionList_ESH_AL_PostRunToPrepShutdown BswM_ActionList_ESH_AL_WakeupToPrep
 #define BswM_ActionList_ESH_AL_InitToWakeup BswM_ActionList_ESH_AL_WaitForNvMWakeup
@@ -155,6 +189,10 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PostRunToPrepNested(vo
 BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PostRunNested(void);
 BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PostRun(void);
 BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PrepToWait(void);
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_CC_CN_CAN00_5e566ad9_RX(void);
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_CC_CN_CAN00_5e566ad9_TX(void);
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_CC_CN_CAN00_5e566ad9_RX_DM(void);
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_RunToPostRunNested(void);
 /*! \} */ /* End of sharing description for BswMRuleFunctions */
 /*! \} */ /* End of group BswMRuleFunctions */
 /* PRQA L:FUNCTIONDECLARATIONS */
@@ -175,6 +213,7 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PrepToWait(void);
 /* PRQA S 5087 1 */ /* MD_MSR_19.1 */
 #include "MemMap.h"
 
+BSWM_LOCAL VAR(uint8, BSWM_VAR_NOINIT) BswM_PduGroupControlInvocation;
 
 #define BSWM_STOP_SEC_VAR_NOINIT_8BIT
 /* PRQA S 5087 1 */ /* MD_MSR_19.1 */
@@ -194,6 +233,9 @@ BSWM_LOCAL VAR(BswM_ESH_RunRequest, BSWM_VAR_NOINIT) Request_ESH_PostRunRequest_
 BSWM_LOCAL VAR(Rte_ModeType_ESH_Mode, BSWM_VAR_NOINIT) BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode;
 
 
+/* PRQA S 3218 3 */ /* MD_BswM_3218 */
+BSWM_LOCAL VAR(Com_IpduGroupVector, BSWM_VAR_NOINIT) BswM_ComIPduGroupState;
+BSWM_LOCAL VAR(Com_IpduGroupVector, BSWM_VAR_NOINIT) BswM_ComRxIPduGroupDMState;
 
 #define BSWM_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 /* PRQA S 5087 1 */ /* MD_MSR_19.1 */
@@ -241,20 +283,27 @@ BSWM_LOCAL VAR(Rte_ModeType_ESH_Mode, BSWM_VAR_NOINIT) BswM_Mode_Notification_ES
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
-CONST(BswM_ActionListsType, BSWM_CONST) BswM_ActionLists[12] = {
-    /* Index    FctPtr                                                 Comment                   Referable Keys */
-  { /*     0 */ BswM_ActionList_ESH_AL_RunToPostRun             },  /* [Priority: 0] */  /* [AL_ESH_AL_RunToPostRun] */
-  { /*     1 */ BswM_ActionList_ESH_AL_WaitForNvMToShutdown     },  /* [Priority: 0] */  /* [AL_ESH_AL_WaitForNvMToShutdown] */
-  { /*     2 */ BswM_ActionList_ESH_AL_WakeupToPrep             },  /* [Priority: 0] */  /* [AL_ESH_AL_WakeupToPrep] */
-  { /*     3 */ BswM_ActionList_ESH_AL_WaitForNvMWakeup         },  /* [Priority: 0] */  /* [AL_ESH_AL_WaitForNvMWakeup] */
-  { /*     4 */ BswM_ActionList_ESH_AL_WakeupToRun              },  /* [Priority: 0] */  /* [AL_ESH_AL_WakeupToRun] */
-  { /*     5 */ BswM_ActionList_ESH_AL_InitToWakeup             },  /* [Priority: 0] */  /* [AL_ESH_AL_InitToWakeup] */
-  { /*     6 */ BswM_ActionList_ESH_AL_PostRunToPrepShutdown    },  /* [Priority: 0] */  /* [AL_ESH_AL_PostRunToPrepShutdown] */
-  { /*     7 */ BswM_ActionList_ESH_AL_ESH_PostRunToPrepCheck   },  /* [Priority: 0] */  /* [AL_ESH_AL_ESH_PostRunToPrepCheck] */
-  { /*     8 */ BswM_ActionList_ESH_AL_PostRunToRun             },  /* [Priority: 0] */  /* [AL_ESH_AL_PostRunToRun] */
-  { /*     9 */ BswM_ActionList_ESH_AL_ExitPostRun              },  /* [Priority: 0] */  /* [AL_ESH_AL_ExitPostRun] */
-  { /*    10 */ BswM_ActionList_ESH_AL_PrepShutdownToWaitForNvM },  /* [Priority: 0] */  /* [AL_ESH_AL_PrepShutdownToWaitForNvM] */
-  { /*    11 */ BswM_ActionList_INIT_AL_Initialize              }   /* [Priority: 0] */  /* [AL_INIT_AL_Initialize] */
+CONST(BswM_ActionListsType, BSWM_CONST) BswM_ActionLists[19] = {
+    /* Index    FctPtr                                                         Comment                   Referable Keys */
+  { /*     0 */ BswM_ActionList_ESH_AL_RunToPostRun                     },  /* [Priority: 0] */  /* [AL_ESH_AL_RunToPostRun] */
+  { /*     1 */ BswM_ActionList_ESH_AL_WaitForNvMToShutdown             },  /* [Priority: 0] */  /* [AL_ESH_AL_WaitForNvMToShutdown] */
+  { /*     2 */ BswM_ActionList_ESH_AL_WakeupToPrep                     },  /* [Priority: 0] */  /* [AL_ESH_AL_WakeupToPrep] */
+  { /*     3 */ BswM_ActionList_ESH_AL_WaitForNvMWakeup                 },  /* [Priority: 0] */  /* [AL_ESH_AL_WaitForNvMWakeup] */
+  { /*     4 */ BswM_ActionList_ESH_AL_WakeupToRun                      },  /* [Priority: 0] */  /* [AL_ESH_AL_WakeupToRun] */
+  { /*     5 */ BswM_ActionList_ESH_AL_InitToWakeup                     },  /* [Priority: 0] */  /* [AL_ESH_AL_InitToWakeup] */
+  { /*     6 */ BswM_ActionList_ESH_AL_PostRunToPrepShutdown            },  /* [Priority: 0] */  /* [AL_ESH_AL_PostRunToPrepShutdown] */
+  { /*     7 */ BswM_ActionList_ESH_AL_ESH_PostRunToPrepCheck           },  /* [Priority: 0] */  /* [AL_ESH_AL_ESH_PostRunToPrepCheck] */
+  { /*     8 */ BswM_ActionList_ESH_AL_PostRunToRun                     },  /* [Priority: 0] */  /* [AL_ESH_AL_PostRunToRun] */
+  { /*     9 */ BswM_ActionList_ESH_AL_ExitPostRun                      },  /* [Priority: 0] */  /* [AL_ESH_AL_ExitPostRun] */
+  { /*    10 */ BswM_ActionList_ESH_AL_PrepShutdownToWaitForNvM         },  /* [Priority: 0] */  /* [AL_ESH_AL_PrepShutdownToWaitForNvM] */
+  { /*    11 */ BswM_ActionList_INIT_AL_Initialize                      },  /* [Priority: 0] */  /* [AL_INIT_AL_Initialize] */
+  { /*    12 */ BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_Disable      },  /* [Priority: 0] */  /* [AL_CC_AL_CN_CAN00_5e566ad9_RX_Disable] */
+  { /*    13 */ BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit },  /* [Priority: 0] */  /* [AL_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit] */
+  { /*    14 */ BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_Disable      },  /* [Priority: 0] */  /* [AL_CC_AL_CN_CAN00_5e566ad9_TX_Disable] */
+  { /*    15 */ BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit },  /* [Priority: 0] */  /* [AL_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit] */
+  { /*    16 */ BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Disable_DM      },  /* [Priority: 0] */  /* [AL_CC_AL_CN_CAN00_5e566ad9_Disable_DM] */
+  { /*    17 */ BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Enable_DM       },  /* [Priority: 0] */  /* [AL_CC_AL_CN_CAN00_5e566ad9_Enable_DM] */
+  { /*    18 */ BswM_ActionList_ESH_AL_ExitRun                          }   /* [Priority: 0] */  /* [AL_ESH_AL_ExitRun] */
 };
 #define BSWM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -290,6 +339,59 @@ CONST(BswM_DeferredRulesType, BSWM_CONST) BswM_DeferredRules[7] = {
 /*lint -restore */
 
 /**********************************************************************************************************************
+  BswM_GenericMapping
+**********************************************************************************************************************/
+/** 
+  \var    BswM_GenericMapping
+  \brief  Maps the external id of BswMGenericRequest to an internal id and references immediate request ports.
+  \details
+  Element                  Description
+  ExternalId               External id of BswMGenericRequest.
+  ImmediateUserEndIdx      the end index of the 0:n relation pointing to BswM_ImmediateUser
+  ImmediateUserStartIdx    the start index of the 0:n relation pointing to BswM_ImmediateUser
+  InitValue                Initialization value of port.
+*/ 
+#define BSWM_START_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+CONST(BswM_GenericMappingType, BSWM_CONST) BswM_GenericMapping[2] = {
+    /* Index    ExternalId  ImmediateUserEndIdx                          ImmediateUserStartIdx                          InitValue                                                            Referable Keys */
+  { /*     0 */ 230       ,                                          2u,                                            1u, BSWM_GENERICVALUE_ESH_State_ESH_INIT                          },  /* [GENERIC_0, MRP_ESH_State] */
+  { /*     1 */ 232       , BSWM_NO_IMMEDIATEUSERENDIDXOFGENERICMAPPING, BSWM_NO_IMMEDIATEUSERSTARTIDXOFGENERICMAPPING, BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_NO_REQUEST }   /* [GENERIC_1, MRP_ESH_ComMPendingRequests] */
+};
+#define BSWM_STOP_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  BswM_ImmediateUser
+**********************************************************************************************************************/
+/** 
+  \var    BswM_ImmediateUser
+  \brief  Contains all immediate request ports.
+  \details
+  Element             Description
+  MaskedBits          contains bitcoded the boolean data of BswM_OnInitOfImmediateUser, BswM_RulesIndUsedOfImmediateUser
+  RulesIndEndIdx      the end index of the 0:n relation pointing to BswM_RulesInd
+  RulesIndStartIdx    the start index of the 0:n relation pointing to BswM_RulesInd
+*/ 
+#define BSWM_START_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+CONST(BswM_ImmediateUserType, BSWM_CONST) BswM_ImmediateUser[2] = {
+    /* Index    MaskedBits  RulesIndEndIdx  RulesIndStartIdx        Comment                                                  Referable Keys */
+  { /*     0 */      0x01u,             3u,               0u },  /* [Name: CC_CanSMIndication_CN_CAN00_5e566ad9] */  /* [MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, CANSM_CHANNEL_0] */
+  { /*     1 */      0x03u,            11u,               3u }   /* [Name: ESH_State]                            */  /* [MRP_ESH_State, GENERIC_0] */
+};
+#define BSWM_STOP_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+
+/**********************************************************************************************************************
   BswM_Rules
 **********************************************************************************************************************/
 /** 
@@ -303,18 +405,22 @@ CONST(BswM_DeferredRulesType, BSWM_CONST) BswM_DeferredRules[7] = {
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
-CONST(BswM_RulesType, BSWM_CONST) BswM_Rules[10] = {
-    /* Index    Id  FctPtr                                   Referable Keys */
-  { /*     0 */ 5u, BswM_Rule_ESH_RunToPostRun        },  /* [R_ESH_RunToPostRun, MRP_ESH_State, MRP_ESH_ModeNotification, MRP_ESH_RunRequest_0, MRP_ESH_RunRequest_1, MRP_ESH_SelfRunRequestTimer, NoPartitions] */
-  { /*     1 */ 6u, BswM_Rule_ESH_WaitToShutdown      },  /* [R_ESH_WaitToShutdown, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, NoPartitions] */
-  { /*     2 */ 8u, BswM_Rule_ESH_WakeupToPrep        },  /* [R_ESH_WakeupToPrep, MRP_ESH_State, MRP_ESH_EcuM_GetPendingWakeupEvents, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ModeNotification, NoPartitions] */
-  { /*     3 */ 7u, BswM_Rule_ESH_WaitToWakeup        },  /* [R_ESH_WaitToWakeup, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, NoPartitions] */
-  { /*     4 */ 9u, BswM_Rule_ESH_WakeupToRun         },  /* [R_ESH_WakeupToRun, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ModeNotification, NoPartitions] */
-  { /*     5 */ 0u, BswM_Rule_ESH_InitToWakeup        },  /* [R_ESH_InitToWakeup, MRP_ESH_State, NoPartitions] */
-  { /*     6 */ 3u, BswM_Rule_ESH_PostRunToPrepNested },  /* [R_ESH_PostRunToPrepNested, NoPartitions] */
-  { /*     7 */ 2u, BswM_Rule_ESH_PostRunNested       },  /* [R_ESH_PostRunNested, NoPartitions] */
-  { /*     8 */ 1u, BswM_Rule_ESH_PostRun             },  /* [R_ESH_PostRun, MRP_ESH_State, MRP_ESH_ModeNotification, NoPartitions] */
-  { /*     9 */ 4u, BswM_Rule_ESH_PrepToWait          }   /* [R_ESH_PrepToWait, MRP_ESH_State, MRP_ESH_ModeNotification, NoPartitions] */
+CONST(BswM_RulesType, BSWM_CONST) BswM_Rules[14] = {
+    /* Index    Id   FctPtr                                      Referable Keys */
+  { /*     0 */  8u, BswM_Rule_ESH_RunToPostRun           },  /* [R_ESH_RunToPostRun, MRP_ESH_State, MRP_ESH_ModeNotification, MRP_ESH_ComMIndication_CN_CAN00_5e566ad9, MRP_ESH_RunRequest_0, MRP_ESH_RunRequest_1, MRP_ESH_SelfRunRequestTimer, NoPartitions] */
+  { /*     1 */ 10u, BswM_Rule_ESH_WaitToShutdown         },  /* [R_ESH_WaitToShutdown, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, NoPartitions] */
+  { /*     2 */ 12u, BswM_Rule_ESH_WakeupToPrep           },  /* [R_ESH_WakeupToPrep, MRP_ESH_State, MRP_ESH_EcuM_GetPendingWakeupEvents, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, MRP_ESH_ModeNotification, NoPartitions] */
+  { /*     3 */ 11u, BswM_Rule_ESH_WaitToWakeup           },  /* [R_ESH_WaitToWakeup, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, NoPartitions] */
+  { /*     4 */ 13u, BswM_Rule_ESH_WakeupToRun            },  /* [R_ESH_WakeupToRun, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, MRP_ESH_ModeNotification, NoPartitions] */
+  { /*     5 */  3u, BswM_Rule_ESH_InitToWakeup           },  /* [R_ESH_InitToWakeup, MRP_ESH_State, NoPartitions] */
+  { /*     6 */  6u, BswM_Rule_ESH_PostRunToPrepNested    },  /* [R_ESH_PostRunToPrepNested, NoPartitions] */
+  { /*     7 */  5u, BswM_Rule_ESH_PostRunNested          },  /* [R_ESH_PostRunNested, NoPartitions] */
+  { /*     8 */  4u, BswM_Rule_ESH_PostRun                },  /* [R_ESH_PostRun, MRP_ESH_State, MRP_ESH_ModeNotification, NoPartitions] */
+  { /*     9 */  7u, BswM_Rule_ESH_PrepToWait             },  /* [R_ESH_PrepToWait, MRP_ESH_State, MRP_ESH_ModeNotification, NoPartitions] */
+  { /*    10 */  0u, BswM_Rule_CC_CN_CAN00_5e566ad9_RX    },  /* [R_CC_CN_CAN00_5e566ad9_RX, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, NoPartitions] */
+  { /*    11 */  2u, BswM_Rule_CC_CN_CAN00_5e566ad9_TX    },  /* [R_CC_CN_CAN00_5e566ad9_TX, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, NoPartitions] */
+  { /*    12 */  1u, BswM_Rule_CC_CN_CAN00_5e566ad9_RX_DM },  /* [R_CC_CN_CAN00_5e566ad9_RX_DM, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, NoPartitions] */
+  { /*    13 */  9u, BswM_Rule_ESH_RunToPostRunNested     }   /* [R_ESH_RunToPostRunNested, NoPartitions] */
 };
 #define BSWM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -332,16 +438,19 @@ CONST(BswM_RulesType, BSWM_CONST) BswM_Rules[10] = {
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
-CONST(BswM_RulesIndType, BSWM_CONST) BswM_RulesInd[8] = {
+CONST(BswM_RulesIndType, BSWM_CONST) BswM_RulesInd[11] = {
   /* Index    RulesInd      Referable Keys */
-  /*     0 */       0u,  /* [MRP_ESH_State] */
-  /*     1 */       1u,  /* [MRP_ESH_State] */
-  /*     2 */       2u,  /* [MRP_ESH_State] */
-  /*     3 */       3u,  /* [MRP_ESH_State] */
-  /*     4 */       4u,  /* [MRP_ESH_State] */
-  /*     5 */       5u,  /* [MRP_ESH_State] */
-  /*     6 */       8u,  /* [MRP_ESH_State] */
-  /*     7 */       9u   /* [MRP_ESH_State] */
+  /*     0 */      10u,  /* [MRP_CC_CanSMIndication_CN_CAN00_5e566ad9] */
+  /*     1 */      11u,  /* [MRP_CC_CanSMIndication_CN_CAN00_5e566ad9] */
+  /*     2 */      12u,  /* [MRP_CC_CanSMIndication_CN_CAN00_5e566ad9] */
+  /*     3 */       0u,  /* [MRP_ESH_State] */
+  /*     4 */       1u,  /* [MRP_ESH_State] */
+  /*     5 */       2u,  /* [MRP_ESH_State] */
+  /*     6 */       3u,  /* [MRP_ESH_State] */
+  /*     7 */       4u,  /* [MRP_ESH_State] */
+  /*     8 */       5u,  /* [MRP_ESH_State] */
+  /*     9 */       8u,  /* [MRP_ESH_State] */
+  /*    10 */       9u   /* [MRP_ESH_State] */
 };
 #define BSWM_STOP_SEC_CONST_8BIT
 /*lint -save -esym(961, 19.1) */
@@ -395,8 +504,55 @@ VAR(uBswM_ActionListQueueType, BSWM_VAR_NOINIT) BswM_ActionListQueue;  /* PRQA S
   /*     9 */  /* [AL_ESH_AL_ExitPostRun] */
   /*    10 */  /* [AL_ESH_AL_PrepShutdownToWaitForNvM] */
   /*    11 */  /* [AL_INIT_AL_Initialize] */
+  /*    12 */  /* [AL_CC_AL_CN_CAN00_5e566ad9_RX_Disable] */
+  /*    13 */  /* [AL_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit] */
+  /*    14 */  /* [AL_CC_AL_CN_CAN00_5e566ad9_TX_Disable] */
+  /*    15 */  /* [AL_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit] */
+  /*    16 */  /* [AL_CC_AL_CN_CAN00_5e566ad9_Disable_DM] */
+  /*    17 */  /* [AL_CC_AL_CN_CAN00_5e566ad9_Enable_DM] */
+  /*    18 */  /* [AL_ESH_AL_ExitRun] */
 
 #define BSWM_STOP_SEC_VAR_NOINIT_8BIT
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  BswM_CanSMChannelState
+**********************************************************************************************************************/
+/** 
+  \var    BswM_CanSMChannelState
+  \brief  Variable to store current mode of BswMCanSMIndication mode request ports.
+*/ 
+#define BSWM_START_SEC_VAR_NOINIT_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+VAR(CanSM_BswMCurrentStateType, BSWM_VAR_NOINIT) BswM_CanSMChannelState[1];
+  /* Index        Referable Keys  */
+  /*     0 */  /* [CANSM_CHANNEL_0, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9] */
+
+#define BSWM_STOP_SEC_VAR_NOINIT_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  BswM_ComMChannelState
+**********************************************************************************************************************/
+/** 
+  \var    BswM_ComMChannelState
+  \brief  Variable to store current mode of BswMComMIndication mode request ports.
+*/ 
+#define BSWM_START_SEC_VAR_NOINIT_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
+/*lint -restore */
+VAR(ComM_ModeType, BSWM_VAR_NOINIT) BswM_ComMChannelState[1];
+  /* Index        Referable Keys  */
+  /*     0 */  /* [COMM_CHANNEL_0, MRP_ESH_ComMIndication_CN_CAN00_5e566ad9] */
+
+#define BSWM_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
@@ -425,9 +581,10 @@ VAR(BswM_ForcedActionListPriorityType, BSWM_VAR_NOINIT) BswM_ForcedActionListPri
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
-VAR(BswM_ModeType, BSWM_VAR_NOINIT) BswM_GenericState[1];
+VAR(BswM_ModeType, BSWM_VAR_NOINIT) BswM_GenericState[2];
   /* Index        Referable Keys  */
   /*     0 */  /* [GENERIC_0, MRP_ESH_State] */
+  /*     1 */  /* [GENERIC_1, MRP_ESH_ComMPendingRequests] */
 
 #define BSWM_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -458,9 +615,10 @@ VAR(BswM_InitializedType, BSWM_VAR_NOINIT) BswM_Initialized[1];
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
-VAR(BswM_ModeRequestQueueType, BSWM_VAR_NOINIT) BswM_ModeRequestQueue[1];
+VAR(BswM_ModeRequestQueueType, BSWM_VAR_NOINIT) BswM_ModeRequestQueue[2];
   /* Index        Referable Keys  */
-  /*     0 */  /* [MRP_ESH_State, GENERIC_0] */
+  /*     0 */  /* [MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, CANSM_CHANNEL_0] */
+  /*     1 */  /* [MRP_ESH_State, GENERIC_0] */
 
 #define BSWM_STOP_SEC_VAR_NOINIT_8BIT
 /*lint -save -esym(961, 19.1) */
@@ -504,18 +662,22 @@ VAR(BswM_QueueWrittenType, BSWM_VAR_NOINIT) BswM_QueueWritten[1];
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_19.1 */
 /*lint -restore */
-VAR(BswM_RuleStatesType, BSWM_VAR_NOINIT) BswM_RuleStates[10];
+VAR(BswM_RuleStatesType, BSWM_VAR_NOINIT) BswM_RuleStates[14];
   /* Index        Referable Keys  */
-  /*     0 */  /* [R_ESH_RunToPostRun, MRP_ESH_State, MRP_ESH_ModeNotification, MRP_ESH_RunRequest_0, MRP_ESH_RunRequest_1, MRP_ESH_SelfRunRequestTimer, NoPartitions] */
-  /*     1 */  /* [R_ESH_WaitToShutdown, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, NoPartitions] */
-  /*     2 */  /* [R_ESH_WakeupToPrep, MRP_ESH_State, MRP_ESH_EcuM_GetPendingWakeupEvents, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ModeNotification, NoPartitions] */
-  /*     3 */  /* [R_ESH_WaitToWakeup, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, NoPartitions] */
-  /*     4 */  /* [R_ESH_WakeupToRun, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ModeNotification, NoPartitions] */
+  /*     0 */  /* [R_ESH_RunToPostRun, MRP_ESH_State, MRP_ESH_ModeNotification, MRP_ESH_ComMIndication_CN_CAN00_5e566ad9, MRP_ESH_RunRequest_0, MRP_ESH_RunRequest_1, MRP_ESH_SelfRunRequestTimer, NoPartitions] */
+  /*     1 */  /* [R_ESH_WaitToShutdown, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, NoPartitions] */
+  /*     2 */  /* [R_ESH_WakeupToPrep, MRP_ESH_State, MRP_ESH_EcuM_GetPendingWakeupEvents, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, MRP_ESH_ModeNotification, NoPartitions] */
+  /*     3 */  /* [R_ESH_WaitToWakeup, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, NoPartitions] */
+  /*     4 */  /* [R_ESH_WakeupToRun, MRP_ESH_State, MRP_ESH_EcuM_GetValidatedWakeupEvents, MRP_ESH_ComMPendingRequests, MRP_ESH_ModeNotification, NoPartitions] */
   /*     5 */  /* [R_ESH_InitToWakeup, MRP_ESH_State, NoPartitions] */
   /*     6 */  /* [R_ESH_PostRunToPrepNested, NoPartitions] */
   /*     7 */  /* [R_ESH_PostRunNested, NoPartitions] */
   /*     8 */  /* [R_ESH_PostRun, MRP_ESH_State, MRP_ESH_ModeNotification, NoPartitions] */
   /*     9 */  /* [R_ESH_PrepToWait, MRP_ESH_State, MRP_ESH_ModeNotification, NoPartitions] */
+  /*    10 */  /* [R_CC_CN_CAN00_5e566ad9_RX, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, NoPartitions] */
+  /*    11 */  /* [R_CC_CN_CAN00_5e566ad9_TX, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, NoPartitions] */
+  /*    12 */  /* [R_CC_CN_CAN00_5e566ad9_RX_DM, MRP_CC_CanSMIndication_CN_CAN00_5e566ad9, NoPartitions] */
+  /*    13 */  /* [R_ESH_RunToPostRunNested, NoPartitions] */
 
 #define BSWM_STOP_SEC_VAR_NOINIT_8BIT
 /*lint -save -esym(961, 19.1) */
@@ -574,6 +736,52 @@ VAR(uBswM_TimerValueType, BSWM_VAR_NOINIT) BswM_TimerValue;  /* PRQA S 0759 */  
 /* -----------------------------------------------------------------------------
     &&&~ FUNCTIONS
  ----------------------------------------------------------------------------- */
+/**********************************************************************************************************************
+ *  BswM_ExecuteIpduGroupControl()
+ **********************************************************************************************************************/
+FUNC(void, BSWM_CODE) BswM_ExecuteIpduGroupControl(void)
+{
+  Com_IpduGroupVector ipduGroupState;
+  Com_IpduGroupVector dmState;
+  uint16 iCnt;
+  uint8 controlInvocation = BSWM_GROUPCONTROL_IDLE;
+
+  SchM_Enter_BswM_BSWM_EXCLUSIVE_AREA_0(); /* PRQA S 3109 */ /* MD_MSR_14.3 */
+  if(BswM_PduGroupControlInvocation != BSWM_GROUPCONTROL_IDLE)
+  {
+    if((BswM_PduGroupControlInvocation & BSWM_GROUPCONTROL_NORMAL) != 0u)
+    {
+      iCnt = BSWM_IPDUGROUPVECTORSIZE;
+      while(iCnt-- > (uint16)0x0000) /* PRQA S 3440 */ /* MD_BswM_3440 */
+      {
+        ipduGroupState[iCnt] = BswM_ComIPduGroupState[iCnt]; /* SBSW_BSWM_SETIPDUGROUPVECTOR */
+      }
+    }
+    if((BswM_PduGroupControlInvocation & BSWM_GROUPCONTROL_DM) != 0u)
+    {
+      iCnt = BSWM_IPDUGROUPVECTORSIZE;
+      while(iCnt-- > (uint16)0x0000) /* PRQA S 3440 */ /* MD_BswM_3440 */
+      {
+        dmState[iCnt] = BswM_ComRxIPduGroupDMState[iCnt]; /* SBSW_BSWM_SETIPDUGROUPVECTOR */
+      }
+    }
+    controlInvocation = BswM_PduGroupControlInvocation;
+    BswM_PduGroupControlInvocation = BSWM_GROUPCONTROL_IDLE;
+  }
+  SchM_Exit_BswM_BSWM_EXCLUSIVE_AREA_0(); /* PRQA S 3109 */ /* MD_MSR_14.3 */
+
+  if(controlInvocation != BSWM_GROUPCONTROL_IDLE)
+  {
+    if((controlInvocation & BSWM_GROUPCONTROL_NORMAL) != 0u)
+    {
+      Com_IpduGroupControl(ipduGroupState, FALSE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+    }
+    if((controlInvocation & BSWM_GROUPCONTROL_DM) != 0u)
+    {
+      Com_ReceptionDMControl(dmState); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+    }
+  }
+} /* PRQA S 6010, 6030 */ /* MD_MSR_STPTH, MD_MSR_STCYC */
 
 /**********************************************************************************************************************
  *  BswM_Action_RuleHandler()
@@ -600,6 +808,16 @@ BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_Action_RuleHandler(BswM_HandleTy
   return retVal;
 } 
 
+/**********************************************************************************************************************
+ *  BswM_UpdateRuleStates()
+ **********************************************************************************************************************/
+BSWM_LOCAL_INLINE FUNC(void, BSWM_CODE) BswM_UpdateRuleStates(BswM_SizeOfRuleStatesType ruleId, BswM_RuleStatesType state)
+{
+  if (ruleId < BswM_GetSizeOfRuleStates())
+  {
+    BswM_SetRuleStates(ruleId, state); /* SBSW_BSWM_SETRULESTATE */
+  }
+}
 
 /**********************************************************************************************************************
  *  BswM_UpdateTimer()
@@ -627,6 +845,12 @@ FUNC(void, BSWM_CODE) BswM_Init_Gen_NoPartitions(void)
   Request_ESH_PostRunRequest_0_requestedMode = RELEASED;
   Request_ESH_PostRunRequest_1_requestedMode = RELEASED;
   BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode = RTE_MODE_ESH_Mode_STARTUP;
+  BswM_PduGroupControlInvocation = BSWM_GROUPCONTROL_IDLE;
+
+  /* PRQA S 3109 COMCLEARIPDU */ /* MD_BswM_3109 */
+  Com_ClearIpduGroupVector(BswM_ComIPduGroupState); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  Com_ClearIpduGroupVector(BswM_ComRxIPduGroupDMState); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMCLEARIPDU */
 
   (void)BswM_ActionList_INIT_AL_Initialize();
 }
@@ -671,6 +895,7 @@ FUNC(void, BSWM_CODE) BswM_SwcModeRequestUpdateFct(void)
  *********************************************************************************************************************/
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_RunToPostRun(void)
 {
+  ComM_CommunicationAllowed(ComMConf_ComMChannel_CN_CAN00_5e566ad9, FALSE);
   /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
   EcuM_ClearValidatedWakeupEvent(ECUM_WKSOURCE_ALL_SOURCES);
   /*lint -restore */
@@ -719,6 +944,7 @@ BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_WaitForNvMWake
  *********************************************************************************************************************/
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_WakeupToRun(void)
 {
+  ComM_CommunicationAllowed(ComMConf_ComMChannel_CN_CAN00_5e566ad9, TRUE);
   BswM_UpdateTimer(BSWM_TMR_ESH_SelfRunRequestTimer, 10uL);
   BswM_ESH_OnEnterRun();
   BswM_Switch_ESH_ModeSwitch_BswM_MDGP_ESH_Mode = RTE_MODE_ESH_Mode_RUN;
@@ -740,7 +966,14 @@ BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ESH_PostRunToP
  *********************************************************************************************************************/
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ExitPostRun(void)
 {
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  SchM_Enter_BswM_BSWM_EXCLUSIVE_AREA_0();
+  /*lint -restore */
+  ESH_ComM_CheckPendingRequests();
   (void)BswM_Action_RuleHandler(BSWM_ID_RULE_ESH_PostRunNested);
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  SchM_Exit_BswM_BSWM_EXCLUSIVE_AREA_0();
+  /*lint -restore */
   return E_OK;
 }/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
 
@@ -749,6 +982,7 @@ BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ExitPostRun(vo
  *********************************************************************************************************************/
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_PrepShutdownToWaitForNvM(void)
 {
+  ESH_ComM_CheckPendingRequests();
   BswM_ESH_OnEnterWaitForNvm();
   BswM_RequestMode(BSWM_GENERIC_ESH_State, BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM);
   return E_OK;
@@ -760,7 +994,125 @@ BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_PrepShutdownTo
 BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_INIT_AL_Initialize(void)
 {
   /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  Can_Init(Can_Config_Ptr);
+  /*lint -restore */
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  CanIf_Init(CanIf_Config_Ptr);
+  /*lint -restore */
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  Com_Init(Com_Config_Ptr);
+  /*lint -restore */
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  PduR_Init(PduR_Config_Ptr);
+  /*lint -restore */
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  CanSM_Init(CanSM_Config_Ptr);
+  /*lint -restore */
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  ComM_Init();
+  /*lint -restore */
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
   (void)Rte_Start();
+  /*lint -restore */
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_Disable
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_Disable(void)
+{
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Rx_4cbf71f7, FALSE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduDMGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Rx_4cbf71f7, FALSE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  BswM_MarkPduGroupControlInvocation(BSWM_GROUPCONTROL_NORMAL);
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit(void)
+{
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Rx_4cbf71f7, TRUE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduDMGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Rx_4cbf71f7, TRUE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  BswM_MarkPduGroupControlInvocation(BSWM_GROUPCONTROL_NORMAL);
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_Disable
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_Disable(void)
+{
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Tx_1ae5d671, FALSE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduDMGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Tx_1ae5d671, FALSE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  BswM_MarkPduGroupControlInvocation(BSWM_GROUPCONTROL_NORMAL);
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit(void)
+{
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Tx_1ae5d671, TRUE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduDMGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Tx_1ae5d671, TRUE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  BswM_MarkPduGroupControlInvocation(BSWM_GROUPCONTROL_NORMAL);
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Disable_DM
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Disable_DM(void)
+{
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduDMGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Rx_4cbf71f7, FALSE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  BswM_MarkDmControlInvocation();
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Enable_DM
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Enable_DM(void)
+{
+  /* PRQA S 0277, 3109, 3201, 3325 COMSETIPDU */ /* MD_BswM_0277, MD_BswM_3109, MD_BswM_3201, MD_BswM_3325 */ /*lint -e506 -e572 */
+  BswM_SetIpduDMGroup(ComConf_ComIPduGroup_MyECU_oCAN00_Rx_4cbf71f7, TRUE); /* SBSW_BSWM_IPDUGROUPVECTORCALL */
+  /* PRQA L:COMSETIPDU */ /*lint +e506 +e572 */
+  BswM_MarkDmControlInvocation();
+  return E_OK;
+}/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
+
+/**********************************************************************************************************************
+ *  BswM_ActionList_ESH_AL_ExitRun
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(Std_ReturnType, BSWM_CODE) BswM_ActionList_ESH_AL_ExitRun(void)
+{
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  SchM_Enter_BswM_BSWM_EXCLUSIVE_AREA_0();
+  /*lint -restore */
+  ESH_ComM_CheckPendingRequests();
+  (void)BswM_Action_RuleHandler(BSWM_ID_RULE_ESH_RunToPostRunNested);
+  /*lint -save -e534 *//* PRQA S 3109, 3200 1 */ /* MD_MSR_14.3, MD_BswM_3200 */
+  SchM_Exit_BswM_BSWM_EXCLUSIVE_AREA_0();
   /*lint -restore */
   return E_OK;
 }/* PRQA S 6010, 6030, 6050 */ /* MD_MSR_STPTH, MD_MSR_STCYC, MD_MSR_STCAL */
@@ -776,10 +1128,10 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_RunToPostRun(void)
 {
   BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
   /* Evaluate logical expression ESH_LE_RunToPostRunTransition. */ /* PRQA S 3415 1 */ /* MD_MSR_12.4 */
-  if(((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_RUN) && (BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode == RTE_MODE_ESH_Mode_RUN)) && (((Request_ESH_RunRequest_0_requestedMode == RELEASED) && (Request_ESH_RunRequest_1_requestedMode == RELEASED)) && (BswM_GetTimerState(0) == BSWM_TIMER_EXPIRED)))
+  if(((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_RUN) && (BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode == RTE_MODE_ESH_Mode_RUN)) && ((BswM_GetComMChannelState(0) == COMM_NO_COMMUNICATION) && ((Request_ESH_RunRequest_0_requestedMode == RELEASED) && (Request_ESH_RunRequest_1_requestedMode == RELEASED)) && (BswM_GetTimerState(0) == BSWM_TIMER_EXPIRED)))
   {
-    /* Return conditional action list BswM_ActionList_ESH_AL_RunToPostRun. */
-    retVal = BSWM_ID_AL_ESH_AL_RunToPostRun;
+    /* Return conditional action list BswM_ActionList_ESH_AL_ExitRun. */
+    retVal = BSWM_ID_AL_ESH_AL_ExitRun;
   }
   /* No false action list configured. */
   return retVal;
@@ -792,7 +1144,7 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_WaitToShutdown(void)
 {
   BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
   /* Evaluate logical expression ESH_LE_WaitForNvMToShutdown. */ /* PRQA S 3415 1 */ /* MD_MSR_12.4 */
-  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM) && (EcuM_GetValidatedWakeupEvents() == 0u))
+  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM) && ((EcuM_GetValidatedWakeupEvents() == 0u) && (BswM_GetGenericState(1) == BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_NO_REQUEST)))
   {
     /* Return conditional action list BswM_ActionList_ESH_AL_WaitForNvMToShutdown. */
     retVal = BSWM_ID_AL_ESH_AL_WaitForNvMToShutdown;
@@ -808,7 +1160,7 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_WakeupToPrep(void)
 {
   BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
   /* Evaluate logical expression ESH_LE_WakeupToPrepShutdown. */ /* PRQA S 3415 1 */ /* MD_MSR_12.4 */
-  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAKEUP) && (EcuM_GetPendingWakeupEvents() == 0u) && (EcuM_GetValidatedWakeupEvents() == 0u) && (BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode == RTE_MODE_ESH_Mode_WAKEUP))
+  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAKEUP) && (EcuM_GetPendingWakeupEvents() == 0u) && ((EcuM_GetValidatedWakeupEvents() == 0u) && (BswM_GetGenericState(1) == BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_NO_REQUEST)) && (BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode == RTE_MODE_ESH_Mode_WAKEUP))
   {
     /* Return conditional action list BswM_ActionList_ESH_AL_WakeupToPrep. */
     retVal = BSWM_ID_AL_ESH_AL_WakeupToPrep;
@@ -824,7 +1176,7 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_WaitToWakeup(void)
 {
   BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
   /* Evaluate logical expression ESH_LE_WaitForNvMToWakeup. */ /* PRQA S 3415 1 */ /* MD_MSR_12.4 */
-  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM) && (EcuM_GetValidatedWakeupEvents() != 0u))
+  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAIT_FOR_NVM) && ((EcuM_GetValidatedWakeupEvents() != 0u) || (BswM_GetGenericState(1) == BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_PENDING_REQUEST)))
   {
     /* Return conditional action list BswM_ActionList_ESH_AL_WaitForNvMWakeup. */
     retVal = BSWM_ID_AL_ESH_AL_WaitForNvMWakeup;
@@ -840,7 +1192,7 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_WakeupToRun(void)
 {
   BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
   /* Evaluate logical expression ESH_LE_WakeupToRun. */ /* PRQA S 3415 1 */ /* MD_MSR_12.4 */
-  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAKEUP) && (EcuM_GetValidatedWakeupEvents() != 0u) && (BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode == RTE_MODE_ESH_Mode_WAKEUP))
+  if((BswM_GetGenericState(0) == BSWM_GENERICVALUE_ESH_State_ESH_WAKEUP) && ((EcuM_GetValidatedWakeupEvents() != 0u) || (BswM_GetGenericState(1) == BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_PENDING_REQUEST)) && (BswM_Mode_Notification_ESH_ModeNotification_BswM_MDGP_ESH_Mode == RTE_MODE_ESH_Mode_WAKEUP))
   {
     /* Return conditional action list BswM_ActionList_ESH_AL_WakeupToRun. */
     retVal = BSWM_ID_AL_ESH_AL_WakeupToRun;
@@ -888,7 +1240,7 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PostRunNested(void)
 {
   BswM_HandleType retVal;
   /* Evaluate logical expression ESH_LE_PostRunToRun. */
-  if(((Request_ESH_RunRequest_0_requestedMode == REQUESTED) || (Request_ESH_RunRequest_1_requestedMode == REQUESTED)) || (EcuM_GetValidatedWakeupEvents() != 0u))
+  if(((Request_ESH_RunRequest_0_requestedMode == REQUESTED) || (Request_ESH_RunRequest_1_requestedMode == REQUESTED)) || ((EcuM_GetValidatedWakeupEvents() != 0u) || (BswM_GetGenericState(1) == BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_PENDING_REQUEST)))
   {
     /* Return conditional action list BswM_ActionList_ESH_AL_PostRunToRun. */
     retVal = BSWM_ID_AL_ESH_AL_PostRunToRun;
@@ -928,6 +1280,106 @@ BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_PrepToWait(void)
   {
     /* Return conditional action list BswM_ActionList_ESH_AL_PrepShutdownToWaitForNvM. */
     retVal = BSWM_ID_AL_ESH_AL_PrepShutdownToWaitForNvM;
+  }
+  /* No false action list configured. */
+  return retVal;
+}
+
+/**********************************************************************************************************************
+ *  BswM_Rule_CC_CN_CAN00_5e566ad9_RX
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_CC_CN_CAN00_5e566ad9_RX(void)
+{
+  BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
+  /* Evaluate logical expression CC_LE_CN_CAN00_5e566ad9_RX. */
+  if(BswM_GetCanSMChannelState(0) != CANSM_BSWM_NO_COMMUNICATION)
+  {
+    if( BswM_GetRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX) != BSWM_TRUE ) /* COV_BSWM_TRIGGEREDRULEEXECUTION */
+    {
+      BswM_UpdateRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX, BSWM_TRUE);
+      /* Return triggered action list BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit. */
+      retVal = BSWM_ID_AL_CC_AL_CN_CAN00_5e566ad9_RX_EnableNoinit;
+    }
+  }
+  else
+  {
+    if( BswM_GetRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX) != BSWM_FALSE ) /* COV_BSWM_TRIGGEREDRULEEXECUTION */
+    {
+      BswM_UpdateRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX, BSWM_FALSE);
+      /* Return triggered action list BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_RX_Disable. */
+      retVal = BSWM_ID_AL_CC_AL_CN_CAN00_5e566ad9_RX_Disable;
+    }
+  }
+  return retVal;
+}
+
+/**********************************************************************************************************************
+ *  BswM_Rule_CC_CN_CAN00_5e566ad9_TX
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_CC_CN_CAN00_5e566ad9_TX(void)
+{
+  BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
+  /* Evaluate logical expression CC_LE_CN_CAN00_5e566ad9_TX. */
+  if(BswM_GetCanSMChannelState(0) == CANSM_BSWM_FULL_COMMUNICATION)
+  {
+    if( BswM_GetRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_TX) != BSWM_TRUE ) /* COV_BSWM_TRIGGEREDRULEEXECUTION */
+    {
+      BswM_UpdateRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_TX, BSWM_TRUE);
+      /* Return triggered action list BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit. */
+      retVal = BSWM_ID_AL_CC_AL_CN_CAN00_5e566ad9_TX_EnableNoinit;
+    }
+  }
+  else
+  {
+    if( BswM_GetRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_TX) != BSWM_FALSE ) /* COV_BSWM_TRIGGEREDRULEEXECUTION */
+    {
+      BswM_UpdateRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_TX, BSWM_FALSE);
+      /* Return triggered action list BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_TX_Disable. */
+      retVal = BSWM_ID_AL_CC_AL_CN_CAN00_5e566ad9_TX_Disable;
+    }
+  }
+  return retVal;
+}
+
+/**********************************************************************************************************************
+ *  BswM_Rule_CC_CN_CAN00_5e566ad9_RX_DM
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_CC_CN_CAN00_5e566ad9_RX_DM(void)
+{
+  BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
+  /* Evaluate logical expression CC_LE_CN_CAN00_5e566ad9_RX_DM. */
+  if(BswM_GetCanSMChannelState(0) == CANSM_BSWM_FULL_COMMUNICATION)
+  {
+    if( BswM_GetRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX_DM) != BSWM_TRUE ) /* COV_BSWM_TRIGGEREDRULEEXECUTION */
+    {
+      BswM_UpdateRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX_DM, BSWM_TRUE);
+      /* Return triggered action list BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Enable_DM. */
+      retVal = BSWM_ID_AL_CC_AL_CN_CAN00_5e566ad9_Enable_DM;
+    }
+  }
+  else
+  {
+    if( BswM_GetRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX_DM) != BSWM_FALSE ) /* COV_BSWM_TRIGGEREDRULEEXECUTION */
+    {
+      BswM_UpdateRuleStates(BSWM_ID_RULE_CC_CN_CAN00_5e566ad9_RX_DM, BSWM_FALSE);
+      /* Return triggered action list BswM_ActionList_CC_AL_CN_CAN00_5e566ad9_Disable_DM. */
+      retVal = BSWM_ID_AL_CC_AL_CN_CAN00_5e566ad9_Disable_DM;
+    }
+  }
+  return retVal;
+}
+
+/**********************************************************************************************************************
+ *  BswM_Rule_ESH_RunToPostRunNested
+ *********************************************************************************************************************/
+BSWM_LOCAL FUNC(BswM_HandleType, BSWM_CODE) BswM_Rule_ESH_RunToPostRunNested(void)
+{
+  BswM_HandleType retVal = BSWM_NO_ACTIONLIST;
+  /* Evaluate logical expression ESH_LE_ComMNoPendingRequests. */
+  if(BswM_GetGenericState(1) == BSWM_GENERICVALUE_ESH_ComMPendingRequests_ESH_COMM_NO_REQUEST)
+  {
+    /* Return conditional action list BswM_ActionList_ESH_AL_RunToPostRun. */
+    retVal = BSWM_ID_AL_ESH_AL_RunToPostRun;
   }
   /* No false action list configured. */
   return retVal;

@@ -2821,6 +2821,7 @@ CANIF_LOCAL_INLINE FUNC (Std_ReturnType, CANIF_CODE) CanIf_TransmitSubWrite(P2CO
  *
  *
  */
+uint8 CanIf_GetCtrlMode = 0;
 FUNC(Std_ReturnType, CANIF_CODE) CanIf_Transmit(PduIdType CanTxPduId, P2CONST(PduInfoType, AUTOMATIC, CANIF_APPL_MSG_VAR)PduInfoPtr)
 {
   /* ----- Local Variables ---------------------------------------------- */
@@ -2912,6 +2913,7 @@ FUNC(Std_ReturnType, CANIF_CODE) CanIf_Transmit(PduIdType CanTxPduId, P2CONST(Pd
 #endif
         {
           /* #120 Process only if CAN channel is active */
+          CanIf_GetCtrlMode = CanIf_GetCtrlMode(CanIf_Controller_Value_Local);
           if (CanIf_GetCtrlMode(CanIf_Controller_Value_Local) == CANIF_CS_STARTED)
           {
             /* Check PDU mode */

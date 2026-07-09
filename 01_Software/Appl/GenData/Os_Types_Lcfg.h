@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Os_Types_Lcfg.h
- *   Generation Time: 2026-06-25 23:25:57
+ *   Generation Time: 2026-07-08 01:58:09
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -65,10 +65,14 @@
 #define OsTask_BSW_SCHM OsTask_BSW_SCHM
 
 /* Category 2 ISR identifiers. */
+#define CanIsr_0_BusOff CanIsr_0_BusOff
+#define CanIsr_0_MB00To15 CanIsr_0_MB00To15
+#define CanIsr_0_MB16To31 CanIsr_0_MB16To31
 #define CounterIsr_SystemTimer CounterIsr_SystemTimer
 
 /* Alarm identifiers. */
 #define Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms
+#define Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms
 #define Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable
 
 /* Counter identifiers. */
@@ -137,8 +141,11 @@ typedef enum
 /*! Category 2 ISR identifiers. */
 typedef enum
 {
-  CounterIsr_SystemTimer = 0,
-  OS_ISRID_COUNT = 1,
+  CanIsr_0_BusOff = 0,
+  CanIsr_0_MB00To15 = 1,
+  CanIsr_0_MB16To31 = 2,
+  CounterIsr_SystemTimer = 3,
+  OS_ISRID_COUNT = 4,
   INVALID_ISR = OS_ISRID_COUNT
 } ISRType;
 
@@ -146,8 +153,9 @@ typedef enum
 typedef enum
 {
   Rte_Al_TE2_OsTask_BSW_SCHM_0_10ms = 0,
-  Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable = 1,
-  OS_ALARMID_COUNT = 2
+  Rte_Al_TE2_OsTask_BSW_SCHM_0_20ms = 1,
+  Rte_Al_TE_Ct_LedCtrl_LedCtrl_Runnable = 2,
+  OS_ALARMID_COUNT = 3
 } AlarmType;
 
 /*! Counter identifiers. */

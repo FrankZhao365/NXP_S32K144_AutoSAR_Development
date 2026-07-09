@@ -31,5 +31,35 @@
                 <Setting Value="D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\MCAL\S32k144_MCAL_Cfg.arxml" Name="filePath"/>
             </Settings>
         </Settings>
+        <Settings Name="1783271333221">
+            <Settings Name="0">
+                <Settings Name="0">
+                    <Setting Value="true" Name="active"/>
+                    <Setting Value="/Base/Base" Name="ecucPath"/>
+                    <Setting Value="Merge" Name="importMode"/>
+                </Settings>
+                <Settings Name="1">
+                    <Setting Value="true" Name="active"/>
+                    <Setting Value="/Dio/Dio" Name="ecucPath"/>
+                    <Setting Value="Merge" Name="importMode"/>
+                </Settings>
+                <Settings Name="2">
+                    <Setting Value="true" Name="active"/>
+                    <Setting Value="/Mcu/Mcu" Name="ecucPath"/>
+                    <Setting Value="Merge" Name="importMode"/>
+                </Settings>
+                <Settings Name="3">
+                    <Setting Value="true" Name="active"/>
+                    <Setting Value="/Port/Port" Name="ecucPath"/>
+                    <Setting Value="Merge" Name="importMode"/>
+                </Settings>
+                <Settings Name="4">
+                    <Setting Value="true" Name="active"/>
+                    <Setting Value="/Resource/Resource" Name="ecucPath"/>
+                    <Setting Value="Merge" Name="importMode"/>
+                </Settings>
+                <Setting Value="D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\MCAL_Arxml\S32k144_MCAL_Cfg_CAN.arxml" Name="filePath"/>
+            </Settings>
+        </Settings>
     </Settings>
 </Settings>

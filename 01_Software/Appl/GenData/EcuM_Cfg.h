@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: EcuM_Cfg.h
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-08 01:50:06
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -208,22 +208,23 @@
 #define ECUM_BSWMPARTITIONOFPARTITIONINIT                             STD_OFF  /**< Deactivateable: 'EcuM_PartitionInit.BswMPartition' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_ECUMPARTITIONOFPARTITIONINIT                             STD_OFF  /**< Deactivateable: 'EcuM_PartitionInit.EcuMPartition' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_SIZEOFDRIVERINITONE                                      STD_ON
+#define ECUM_SIZEOFWAKEUPSOURCELIST                                   STD_ON
 #define ECUM_SLEEPMODELIST                                            STD_OFF  /**< Deactivateable: 'EcuM_SleepModeList' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_MCUMODEOFSLEEPMODELIST                                   STD_OFF  /**< Deactivateable: 'EcuM_SleepModeList.McuMode' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_POLLINGOFSLEEPMODELIST                                   STD_OFF  /**< Deactivateable: 'EcuM_SleepModeList.Polling' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_VALIDOFSLEEPMODELIST                                     STD_OFF  /**< Deactivateable: 'EcuM_SleepModeList.Valid' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_WAKEUPSOURCEOFSLEEPMODELIST                              STD_OFF  /**< Deactivateable: 'EcuM_SleepModeList.WakeupSource' Reason: 'the struct is deactivated because all elements are deactivated.' */
 #define ECUM_VALIDATIONTIMEOUTTABLE                                   STD_OFF  /**< Deactivateable: 'EcuM_ValidationTimeoutTable' Reason: 'No validation timeouts configured.' */
-#define ECUM_WAKEUPSOURCELIST                                         STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_CHANNELOFWAKEUPSOURCELIST                                STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Channel' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_CHECKWAKEUPTIMEOFWAKEUPSOURCELIST                        STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.CheckWakeupTime' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_COMMPNCSENDIDXOFWAKEUPSOURCELIST                         STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ComMPNCsEndIdx' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_COMMPNCSSTARTIDXOFWAKEUPSOURCELIST                       STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ComMPNCsStartIdx' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_COMMPNCSUSEDOFWAKEUPSOURCELIST                           STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ComMPNCsUsed' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_POLLINGOFWAKEUPSOURCELIST                                STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Polling' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_REASONOFWAKEUPSOURCELIST                                 STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Reason' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_VALIDOFWAKEUPSOURCELIST                                  STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Valid' Reason: 'the struct is deactivated because all elements are deactivated.' */
-#define ECUM_VALIDATIONTIMEOFWAKEUPSOURCELIST                         STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ValidationTime' Reason: 'the struct is deactivated because all elements are deactivated.' */
+#define ECUM_WAKEUPSOURCELIST                                         STD_ON
+#define ECUM_CHANNELOFWAKEUPSOURCELIST                                STD_ON
+#define ECUM_CHECKWAKEUPTIMEOFWAKEUPSOURCELIST                        STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.CheckWakeupTime' Reason: 'the value of EcuM_CheckWakeupTimeOfWakeupSourceList is always '0' due to this, the array is deactivated.' */
+#define ECUM_COMMPNCSENDIDXOFWAKEUPSOURCELIST                         STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ComMPNCsEndIdx' Reason: 'the optional indirection is deactivated because ComMPNCsUsedOfWakeupSourceList is always 'FALSE' and the target of the indirection is of the Configuration Class 'PRE_COMPILE'.' */
+#define ECUM_COMMPNCSSTARTIDXOFWAKEUPSOURCELIST                       STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ComMPNCsStartIdx' Reason: 'the optional indirection is deactivated because ComMPNCsUsedOfWakeupSourceList is always 'FALSE' and the target of the indirection is of the Configuration Class 'PRE_COMPILE'.' */
+#define ECUM_COMMPNCSUSEDOFWAKEUPSOURCELIST                           STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ComMPNCsUsed' Reason: 'the optional indirection is deactivated because ComMPNCsUsedOfWakeupSourceList is always 'FALSE' and the target of the indirection is of the Configuration Class 'PRE_COMPILE'.' */
+#define ECUM_POLLINGOFWAKEUPSOURCELIST                                STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Polling' Reason: 'the value of EcuM_PollingOfWakeupSourceList is always 'false' due to this, the array is deactivated.' */
+#define ECUM_REASONOFWAKEUPSOURCELIST                                 STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Reason' Reason: 'No Mcu Reset Reason configured.' */
+#define ECUM_VALIDOFWAKEUPSOURCELIST                                  STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.Valid' Reason: 'the value of EcuM_ValidOfWakeupSourceList is always 'true' due to this, the array is deactivated.' */
+#define ECUM_VALIDATIONTIMEOFWAKEUPSOURCELIST                         STD_OFF  /**< Deactivateable: 'EcuM_WakeupSourceList.ValidationTime' Reason: 'the value of EcuM_ValidationTimeOfWakeupSourceList is always '0' due to this, the array is deactivated.' */
 #define ECUM_PCCONFIG                                                 STD_ON
 #define ECUM_DEFAULTAPPMODEOFPCCONFIG                                 STD_ON
 #define ECUM_DEFAULTSHUTDOWNMODEOFPCCONFIG                            STD_ON
@@ -238,6 +239,8 @@
 #define ECUM_MODULESTATEOFPCCONFIG                                    STD_ON
 #define ECUM_NORMALMCUMODEOFPCCONFIG                                  STD_ON
 #define ECUM_SIZEOFDRIVERINITONEOFPCCONFIG                            STD_ON
+#define ECUM_SIZEOFWAKEUPSOURCELISTOFPCCONFIG                         STD_ON
+#define ECUM_WAKEUPSOURCELISTOFPCCONFIG                               STD_ON
 /** 
   \}
 */ 
@@ -248,8 +251,10 @@
   \{
 */ 
 #define ECUM_ISDEF_FUNCTIONOFDRIVERINITONE                            STD_OFF
+#define ECUM_ISDEF_CHANNELOFWAKEUPSOURCELIST                          STD_OFF
 #define ECUM_ISDEF_DRIVERINITONEOFPCCONFIG                            STD_ON
 #define ECUM_ISDEF_MODULESTATEOFPCCONFIG                              STD_ON
+#define ECUM_ISDEF_WAKEUPSOURCELISTOFPCCONFIG                         STD_ON
 /** 
   \}
 */ 
@@ -260,8 +265,10 @@
   \{
 */ 
 #define ECUM_EQ2_FUNCTIONOFDRIVERINITONE                              
+#define ECUM_EQ2_CHANNELOFWAKEUPSOURCELIST                            
 #define ECUM_EQ2_DRIVERINITONEOFPCCONFIG                              EcuM_DriverInitOne
 #define ECUM_EQ2_MODULESTATEOFPCCONFIG                                EcuM_ModuleState
+#define ECUM_EQ2_WAKEUPSOURCELISTOFPCCONFIG                           EcuM_WakeupSourceList
 /** 
   \}
 */ 
@@ -326,6 +333,9 @@ typedef P2FUNC ( void, ECUM_CODE, EcuM_DriverFuncType)( void );
 /**   \brief  type used to iterate EcuM_DriverInitOne */
 typedef uint8_least EcuM_DriverInitOneIterType;
 
+/**   \brief  type used to iterate EcuM_WakeupSourceList */
+typedef uint8_least EcuM_WakeupSourceListIterType;
+
 /** 
   \}
 */ 
@@ -359,6 +369,12 @@ typedef uint32 EcuM_NormalMcuModeType;
 /**   \brief  value based type definition for EcuM_SizeOfDriverInitOne */
 typedef uint8 EcuM_SizeOfDriverInitOneType;
 
+/**   \brief  value based type definition for EcuM_SizeOfWakeupSourceList */
+typedef uint8 EcuM_SizeOfWakeupSourceListType;
+
+/**   \brief  value based type definition for EcuM_ChannelOfWakeupSourceList */
+typedef uint8 EcuM_ChannelOfWakeupSourceListType;
+
 /** 
   \}
 */ 
@@ -373,6 +389,12 @@ typedef struct sEcuM_DriverInitOneType
 {
   EcuM_DriverFuncType FunctionOfDriverInitOne;
 } EcuM_DriverInitOneType;
+
+/**   \brief  type used in EcuM_WakeupSourceList */
+typedef struct sEcuM_WakeupSourceListType
+{
+  EcuM_ChannelOfWakeupSourceListType ChannelOfWakeupSourceList;  /**< Mapped ComM channel number - 255 if no ComM channel is assigned. */
+} EcuM_WakeupSourceListType;
 
 /** 
   \}

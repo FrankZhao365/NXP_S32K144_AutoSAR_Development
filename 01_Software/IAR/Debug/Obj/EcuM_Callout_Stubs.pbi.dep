@@ -15,6 +15,9 @@ EcuM_Callout_Stubs.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include/Cdd_Com_Compiler_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Os_Compiler_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/Rte_UserTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common\ComStack_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common/Std_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\ComStack_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/Rte_DataHandleType.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\EcuM_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include\MemMap.h \
@@ -63,8 +66,49 @@ EcuM_Callout_Stubs.pbi: \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Det_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\BswM\BswM.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\BswM_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\BswM\BswM_ComM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\ComM\ComM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\ComM_Lcfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/ComM_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\ComM\ComM_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\ComM_GenTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Components\Rte_ComM_Type.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\ComM_PBcfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\ComM\ComM_EcuMBswM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\ComM_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\BswM\BswM_CanSM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanSM\CanSM_BswM.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\BswM\BswM_EcuM.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Rte_Main.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Can\Can.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Can_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common\Can_GeneralTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\_Common/ComStack_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Can_DrvGeneralTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanIf\CanIf_GeneralTypes.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanIf\CanIf.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\CanIf_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanIf\CanIf_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanSM\CanSM_EcuM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanSM/CanSM.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\CanSM_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\CanSM\CanSM_Int.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\Com\Com.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\Com_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/Com_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/Com_PBcfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/Com_Cbk.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/Com_Cot.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/PduR_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/PduR_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\VStdLib\vstdlib.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\Include\VStdLib_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\PduR_Com.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\BSW\PduR\PduR.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\PduR_Types.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\PduR_Cfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\PduR_Lcfg.h \
+  D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData/PduR_PBcfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\MCAL\Port_TS_T40D2M10I1R0\include\Port.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\Appl\GenData\include\Port_Cfg.h \
   D:\NXP_S32K144_AutoSAR_Development\NXP_S32K144_AutoSAR_Development\01_Software\IAR\..\MCAL\Port_TS_T40D2M10I1R0\include\Port_EnvCfg.h \

@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Os_Hal_Interrupt_Lcfg.c
- *   Generation Time: 2026-06-25 23:03:38
+ *   Generation Time: 2026-07-08 01:58:08
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -78,6 +78,33 @@
 
 #define OS_START_SEC_CORE0_CONST_UNSPECIFIED
 #include "Os_MemMap_OsSections.h" /* PRQA S 5087 */ /* MD_MSR_19.1 */
+
+/*! HAL ISR configuration data: CanIsr_0_BusOff */
+CONST(Os_Hal_IntIsrConfigType, OS_CONST) OsCfg_Hal_IntIsr_CanIsr_0_BusOff =
+{
+  /* .Level  = */ 81uL,
+  /* .SystemInterruptSource = */ 94uL,
+  /* .CoreInterruptSource = */ 78uL,
+  /* .Mapping = */ OS_HAL_ISR_MAPPING_INACTIVE  
+};
+
+/*! HAL ISR configuration data: CanIsr_0_MB00To15 */
+CONST(Os_Hal_IntIsrConfigType, OS_CONST) OsCfg_Hal_IntIsr_CanIsr_0_MB00To15 =
+{
+  /* .Level  = */ 82uL,
+  /* .SystemInterruptSource = */ 97uL,
+  /* .CoreInterruptSource = */ 81uL,
+  /* .Mapping = */ OS_HAL_ISR_MAPPING_INACTIVE  
+};
+
+/*! HAL ISR configuration data: CanIsr_0_MB16To31 */
+CONST(Os_Hal_IntIsrConfigType, OS_CONST) OsCfg_Hal_IntIsr_CanIsr_0_MB16To31 =
+{
+  /* .Level  = */ 83uL,
+  /* .SystemInterruptSource = */ 98uL,
+  /* .CoreInterruptSource = */ 82uL,
+  /* .Mapping = */ OS_HAL_ISR_MAPPING_INACTIVE  
+};
 
 /*! HAL ISR configuration data: CounterIsr_SystemTimer */
 CONST(Os_Hal_IntIsrConfigType, OS_CONST) OsCfg_Hal_IntIsr_CounterIsr_SystemTimer =
