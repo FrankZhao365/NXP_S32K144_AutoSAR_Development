@@ -50,7 +50,7 @@
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
     </JLinkDriver>
     <DebugChecksum>
-        <Checksum>1144187194</Checksum>
+        <Checksum>3226299421</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>

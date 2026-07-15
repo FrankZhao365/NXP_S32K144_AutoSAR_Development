@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Com_Lcfg.c
- *   Generation Time: 2026-07-08 16:59:09
+ *   Generation Time: 2026-07-14 21:40:40
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -136,6 +136,26 @@ CONST(Com_RxAccessInfoType, COM_CONST) Com_RxAccessInfo[3] = {  /* PRQA S 1514, 
   { /*     0 */          TRUE,          2u, COM_NBIT_BUSACCOFRXACCESSINFO },  /* [/ActiveEcuC/Com/ComConfig/sig_State_RearInteriorLight_omsg_Receive_oCAN00_63323183_Rx, /ActiveEcuC/Com/ComConfig/msg_Receive_oCAN00_2b456e3f_Rx] */
   { /*     1 */          TRUE,          0u, COM_NBIT_BUSACCOFRXACCESSINFO },  /* [/ActiveEcuC/Com/ComConfig/sig_State_RearLeftDoor_omsg_Receive_oCAN00_84ad4140_Rx, /ActiveEcuC/Com/ComConfig/msg_Receive_oCAN00_2b456e3f_Rx] */
   { /*     2 */          TRUE,          1u, COM_NBIT_BUSACCOFRXACCESSINFO }   /* [/ActiveEcuC/Com/ComConfig/sig_State_RearRightDoor_omsg_Receive_oCAN00_a8945098_Rx, /ActiveEcuC/Com/ComConfig/msg_Receive_oCAN00_2b456e3f_Rx] */
+};
+#define COM_STOP_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
+  Com_RxPduCalloutFuncPtr
+**********************************************************************************************************************/
+/** 
+  \var    Com_RxPduCalloutFuncPtr
+  \brief  Rx I-PDU callout function pointer table.
+*/ 
+#define COM_START_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+CONST(ComRxPduCalloutType, COM_CONST) Com_RxPduCalloutFuncPtr[1] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+  /* Index     RxPduCalloutFuncPtr      Referable Keys */
+  /*     0 */ msg_0x210_Callout      /* [/ActiveEcuC/Com/ComConfig/msg_Receive_oCAN00_2b456e3f_Rx] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -262,6 +282,26 @@ CONST(Com_TxModeTrueType, COM_CONST) Com_TxModeTrue[1] = {  /* PRQA S 1514, 1533
 /*lint -restore */
 
 /**********************************************************************************************************************
+  Com_TxPduCalloutFuncPtr
+**********************************************************************************************************************/
+/** 
+  \var    Com_TxPduCalloutFuncPtr
+  \brief  Tx I-PDU callout function pointer table.
+*/ 
+#define COM_START_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+CONST(ComTxPduCalloutType, COM_CONST) Com_TxPduCalloutFuncPtr[1] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+  /* Index     TxPduCalloutFuncPtr      Referable Keys */
+  /*     0 */ msg_0x200_Callout      /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+};
+#define COM_STOP_SEC_CONST_UNSPECIFIED
+/*lint -save -esym(961, 19.1) */
+#include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
+/*lint -restore */
+
+/**********************************************************************************************************************
   Com_TxPduGrpInfo
 **********************************************************************************************************************/
 /** 
@@ -296,6 +336,7 @@ CONST(Com_TxPduGrpInfoType, COM_CONST) Com_TxPduGrpInfo[2] = {  /* PRQA S 1514, 
   TxPduInitValueUsed        TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue
   MetaDataLength            Length of MetaData.
   TxBufferLength            the number of relations pointing to Com_TxBuffer
+  TxPduCalloutFuncPtrIdx    the index of the 0:1 relation pointing to Com_TxPduCalloutFuncPtr
   TxPduInitValueStartIdx    the start index of the 0:n relation pointing to Com_TxPduInitValue
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
@@ -303,9 +344,9 @@ CONST(Com_TxPduGrpInfoType, COM_CONST) Com_TxPduGrpInfo[2] = {  /* PRQA S 1514, 
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
 CONST(Com_TxPduInfoType, COM_CONST) Com_TxPduInfo[2] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    TxPduInitValueUsed  MetaDataLength  TxBufferLength  TxPduInitValueStartIdx        Referable Keys */
-  { /*     0 */               TRUE,             0u,             8u,                     0u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
-  { /*     1 */               TRUE,             0u,             1u,                     8u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+    /* Index    TxPduInitValueUsed  MetaDataLength  TxBufferLength  TxPduCalloutFuncPtrIdx                    TxPduInitValueStartIdx        Referable Keys */
+  { /*     0 */               TRUE,             0u,             8u, COM_NO_TXPDUCALLOUTFUNCPTRIDXOFTXPDUINFO,                     0u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+  { /*     1 */               TRUE,             0u,             1u,                                       0u,                     8u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */

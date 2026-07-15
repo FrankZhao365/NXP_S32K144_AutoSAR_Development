@@ -2556,6 +2556,9 @@
                 <name>$PROJ_DIR$\..\Appl\Source\EcuM_Callout_Stubs.c</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\Appl\Source\IPDU_Callout.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Appl\Source\Os_Callout_Stubs.c</name>
             </file>
             <file>

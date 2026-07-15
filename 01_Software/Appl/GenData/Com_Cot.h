@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Com_Cot.h
- *   Generation Time: 2026-07-08 16:59:09
+ *   Generation Time: 2026-07-14 21:40:40
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -64,8 +64,10 @@
 #include "MemMap.h"    /* PRQA S 5087 1 */ /* MD_MSR_MemMap */
 
 /* Configurable interface TxPduCallout */
+FUNC(boolean, COM_APPL_CODE) msg_0x200_Callout(PduIdType PduId, P2VAR(PduInfoType, AUTOMATIC, COM_APPL_DATA) PduInfoPtr);
 
 /* Configurable interface RxPduCallout */
+FUNC(boolean, COM_APPL_CODE) msg_0x210_Callout(PduIdType PduId, P2CONST(PduInfoType, AUTOMATIC, COM_APPL_DATA) PduInfoPtr);
 
 
 
