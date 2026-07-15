@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Com_Cfg.h
- *   Generation Time: 2026-07-14 21:40:39
+ *   Generation Time: 2026-07-16 00:58:05
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -1629,7 +1629,7 @@
 #define Com_GetSizeOfTxModeFalseOfPCConfig()                          1u  /**< the number of accomplishable value elements in Com_TxModeFalse */
 #define Com_GetSizeOfTxModeInfoOfPCConfig()                           2u  /**< the number of accomplishable value elements in Com_TxModeInfo */
 #define Com_GetSizeOfTxModeTrueOfPCConfig()                           1u  /**< the number of accomplishable value elements in Com_TxModeTrue */
-#define Com_GetSizeOfTxPduCalloutFuncPtrOfPCConfig()                  1u  /**< the number of accomplishable value elements in Com_TxPduCalloutFuncPtr */
+#define Com_GetSizeOfTxPduCalloutFuncPtrOfPCConfig()                  2u  /**< the number of accomplishable value elements in Com_TxPduCalloutFuncPtr */
 #define Com_GetSizeOfTxPduGrpInfoOfPCConfig()                         2u  /**< the number of accomplishable value elements in Com_TxPduGrpInfo */
 #define Com_GetSizeOfTxPduInfoOfPCConfig()                            2u  /**< the number of accomplishable value elements in Com_TxPduInfo */
 #define Com_GetSizeOfTxPduInitValueOfPCConfig()                       9u  /**< the number of accomplishable value elements in Com_TxPduInitValue */
@@ -1724,8 +1724,8 @@
 #define Com_GetMetaDataLengthOfTxPduInfo(Index)                       (Com_GetTxPduInfoOfPCConfig()[(Index)].MetaDataLengthOfTxPduInfo)
 #define Com_GetTxBufferLengthOfTxPduInfo(Index)                       (Com_GetTxPduInfoOfPCConfig()[(Index)].TxBufferLengthOfTxPduInfo)
 #define Com_GetTxPduCalloutFuncPtrIdxOfTxPduInfo(Index)               (Com_GetTxPduInfoOfPCConfig()[(Index)].TxPduCalloutFuncPtrIdxOfTxPduInfo)
+#define Com_IsTxPduCalloutFuncPtrUsedOfTxPduInfo(Index)               ((Com_GetTxPduInfoOfPCConfig()[(Index)].TxPduCalloutFuncPtrUsedOfTxPduInfo) != FALSE)
 #define Com_GetTxPduInitValueStartIdxOfTxPduInfo(Index)               (Com_GetTxPduInfoOfPCConfig()[(Index)].TxPduInitValueStartIdxOfTxPduInfo)
-#define Com_IsTxPduInitValueUsedOfTxPduInfo(Index)                    ((Com_GetTxPduInfoOfPCConfig()[(Index)].TxPduInitValueUsedOfTxPduInfo) != FALSE)
 #define Com_GetTxPduInitValue(Index)                                  (Com_GetTxPduInitValueOfPCConfig()[(Index)])
 #define Com_GetTxProcessingISRLockCounter()                           ((*(Com_GetTxProcessingISRLockCounterOfPCConfig())))
 #define Com_GetTxSduLength(Index)                                     (Com_GetTxSduLengthOfPCConfig()[(Index)])
@@ -1826,9 +1826,9 @@
 #define Com_GetPduWithMetaDataLengthOfTxPduInfo(Index)                Com_GetTxBufferLengthOfTxPduInfo(Index)  /**< Length of Pdu with MetaData. */
 #define Com_GetTxBufferEndIdxOfTxPduInfo(Index)                       ((Com_TxBufferEndIdxOfTxPduInfoType)((((Com_TxBufferEndIdxOfTxPduInfoType)(Index)) + 8u)))  /**< the end index of the 0:n relation pointing to Com_TxBuffer */
 #define Com_GetTxBufferStartIdxOfTxPduInfo(Index)                     Com_GetTxPduInitValueStartIdxOfTxPduInfo(Index)  /**< the start index of the 0:n relation pointing to Com_TxBuffer */
-#define Com_IsTxBufferUsedOfTxPduInfo(Index)                          Com_IsTxPduInitValueUsedOfTxPduInfo(Index)  /**< TRUE, if the 0:n relation has 1 relation pointing to Com_TxBuffer */
-#define Com_IsTxPduCalloutFuncPtrUsedOfTxPduInfo(Index)               (((boolean)(Com_GetTxPduCalloutFuncPtrIdxOfTxPduInfo(Index) != COM_NO_TXPDUCALLOUTFUNCPTRIDXOFTXPDUINFO)) != FALSE)  /**< TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_TxPduCalloutFuncPtr */
+#define Com_IsTxBufferUsedOfTxPduInfo(Index)                          Com_IsTxPduCalloutFuncPtrUsedOfTxPduInfo(Index)  /**< TRUE, if the 0:n relation has 1 relation pointing to Com_TxBuffer */
 #define Com_GetTxPduInitValueEndIdxOfTxPduInfo(Index)                 ((Com_TxPduInitValueEndIdxOfTxPduInfoType)((((Com_TxPduInitValueEndIdxOfTxPduInfoType)(Index)) + 8u)))  /**< the end index of the 0:n relation pointing to Com_TxPduInitValue */
+#define Com_IsTxPduInitValueUsedOfTxPduInfo(Index)                    Com_IsTxPduCalloutFuncPtrUsedOfTxPduInfo(Index)  /**< TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue */
 #define Com_GetTxProcessingISRLockThreshold()                         Com_GetTxProcessingISRLockThresholdOfPCConfig()
 #define Com_GetApplTypeOfTxSigInfo(Index)                             Com_GetBytePositionOfTxSigInfo(Index)  /**< Application data type. */
 #define Com_GetBusAccOfTxSigInfo(Index)                               Com_GetByteLengthOfTxSigInfo(Index)  /**< BUS access algorithm for signal or group signal packing / un-packing. */
@@ -2830,7 +2830,7 @@ typedef struct sCom_TxPduGrpInfoType
 /**   \brief  type used in Com_TxPduInfo */
 typedef struct sCom_TxPduInfoType
 {
-  Com_TxPduInitValueUsedOfTxPduInfoType TxPduInitValueUsedOfTxPduInfo;  /**< TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue */
+  Com_TxPduCalloutFuncPtrUsedOfTxPduInfoType TxPduCalloutFuncPtrUsedOfTxPduInfo;  /**< TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_TxPduCalloutFuncPtr */
   Com_MetaDataLengthOfTxPduInfoType MetaDataLengthOfTxPduInfo;  /**< Length of MetaData. */
   Com_TxBufferLengthOfTxPduInfoType TxBufferLengthOfTxPduInfo;  /**< the number of relations pointing to Com_TxBuffer */
   Com_TxPduCalloutFuncPtrIdxOfTxPduInfoType TxPduCalloutFuncPtrIdxOfTxPduInfo;  /**< the index of the 0:1 relation pointing to Com_TxPduCalloutFuncPtr */
@@ -3232,7 +3232,7 @@ extern CONST(Com_TxModeTrueType, COM_CONST) Com_TxModeTrue[1];
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-extern CONST(ComTxPduCalloutType, COM_CONST) Com_TxPduCalloutFuncPtr[1];
+extern CONST(ComTxPduCalloutType, COM_CONST) Com_TxPduCalloutFuncPtr[2];
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
@@ -3265,12 +3265,12 @@ extern CONST(Com_TxPduGrpInfoType, COM_CONST) Com_TxPduGrpInfo[2];
   \var    Com_TxPduInfo
   \brief  Contains all relevant information for Tx I-PDUs.
   \details
-  Element                   Description
-  TxPduInitValueUsed        TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue
-  MetaDataLength            Length of MetaData.
-  TxBufferLength            the number of relations pointing to Com_TxBuffer
-  TxPduCalloutFuncPtrIdx    the index of the 0:1 relation pointing to Com_TxPduCalloutFuncPtr
-  TxPduInitValueStartIdx    the start index of the 0:n relation pointing to Com_TxPduInitValue
+  Element                    Description
+  TxPduCalloutFuncPtrUsed    TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_TxPduCalloutFuncPtr
+  MetaDataLength             Length of MetaData.
+  TxBufferLength             the number of relations pointing to Com_TxBuffer
+  TxPduCalloutFuncPtrIdx     the index of the 0:1 relation pointing to Com_TxPduCalloutFuncPtr
+  TxPduInitValueStartIdx     the start index of the 0:n relation pointing to Com_TxPduInitValue
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */

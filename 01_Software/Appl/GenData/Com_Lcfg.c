@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *              File: Com_Lcfg.c
- *   Generation Time: 2026-07-14 21:40:40
+ *   Generation Time: 2026-07-16 00:58:08
  *           Project: S32K144_Development_Start - Version 1.0
  *          Delivery: CBD1800257_D01
  *      Tool Version: DaVinci Configurator  5.18.37 SP1
@@ -292,9 +292,10 @@ CONST(Com_TxModeTrueType, COM_CONST) Com_TxModeTrue[1] = {  /* PRQA S 1514, 1533
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
-CONST(ComTxPduCalloutType, COM_CONST) Com_TxPduCalloutFuncPtr[1] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
+CONST(ComTxPduCalloutType, COM_CONST) Com_TxPduCalloutFuncPtr[2] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
   /* Index     TxPduCalloutFuncPtr      Referable Keys */
-  /*     0 */ msg_0x200_Callout      /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*     0 */ msg_0x200_Callout   ,  /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx] */
+  /*     1 */ msg_0x511_Callout      /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
@@ -332,21 +333,21 @@ CONST(Com_TxPduGrpInfoType, COM_CONST) Com_TxPduGrpInfo[2] = {  /* PRQA S 1514, 
   \var    Com_TxPduInfo
   \brief  Contains all relevant information for Tx I-PDUs.
   \details
-  Element                   Description
-  TxPduInitValueUsed        TRUE, if the 0:n relation has 1 relation pointing to Com_TxPduInitValue
-  MetaDataLength            Length of MetaData.
-  TxBufferLength            the number of relations pointing to Com_TxBuffer
-  TxPduCalloutFuncPtrIdx    the index of the 0:1 relation pointing to Com_TxPduCalloutFuncPtr
-  TxPduInitValueStartIdx    the start index of the 0:n relation pointing to Com_TxPduInitValue
+  Element                    Description
+  TxPduCalloutFuncPtrUsed    TRUE, if the 0:1 relation has minimum 1 relation pointing to Com_TxPduCalloutFuncPtr
+  MetaDataLength             Length of MetaData.
+  TxBufferLength             the number of relations pointing to Com_TxBuffer
+  TxPduCalloutFuncPtrIdx     the index of the 0:1 relation pointing to Com_TxPduCalloutFuncPtr
+  TxPduInitValueStartIdx     the start index of the 0:n relation pointing to Com_TxPduInitValue
 */ 
 #define COM_START_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
 #include "MemMap.h"  /* PRQA S 5087 */  /* MD_MSR_MemMap */
 /*lint -restore */
 CONST(Com_TxPduInfoType, COM_CONST) Com_TxPduInfo[2] = {  /* PRQA S 1514, 1533 */  /* MD_CSL_ObjectOnlyAccessedOnce */
-    /* Index    TxPduInitValueUsed  MetaDataLength  TxBufferLength  TxPduCalloutFuncPtrIdx                    TxPduInitValueStartIdx        Referable Keys */
-  { /*     0 */               TRUE,             0u,             8u, COM_NO_TXPDUCALLOUTFUNCPTRIDXOFTXPDUINFO,                     0u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
-  { /*     1 */               TRUE,             0u,             1u,                                       0u,                     8u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+    /* Index    TxPduCalloutFuncPtrUsed  MetaDataLength  TxBufferLength  TxPduCalloutFuncPtrIdx  TxPduInitValueStartIdx        Referable Keys */
+  { /*     0 */                    TRUE,             0u,             8u,                     1u,                     0u },  /* [/ActiveEcuC/Com/ComConfig/msg_MyECU_Lamp_oCAN00_818e1651_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
+  { /*     1 */                    TRUE,             0u,             1u,                     0u,                     8u }   /* [/ActiveEcuC/Com/ComConfig/msg_Transmit_oCAN00_0723e95e_Tx, /ActiveEcuC/Com/ComConfig/MyECU_oCAN00_Tx_1ae5d671] */
 };
 #define COM_STOP_SEC_CONST_UNSPECIFIED
 /*lint -save -esym(961, 19.1) */
